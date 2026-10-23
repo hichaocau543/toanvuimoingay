@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Toán vui tiểu học</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff;--card:#fff;--ink:#21242c;--mut:#5d6270;--line:#dcdee4;--pri:#4a4de7;--pri-d:#3234b0;--pri-ink:#fff;--priL:#eaecff;--priLd:#c9cefb;--priT:#3a3dd0;--ok:#1b7f55;--okbg:#e0f5ea;--bad:#c0344a;--badbg:#fde7ea;--gb:#fde4f0;--gt:#a0215d;--sun:#ffd23f;--scr:#1c2350;--scr-ink:#fff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#13141c;--card:#1c1e2a;--ink:#eceef6;--mut:#a3a8bd;--line:#33374b;--pri:#8b8ff5;--pri-d:#5b5fcf;--pri-ink:#101126;--priL:#272b55;--priLd:#3b4080;--priT:#a8abff;--ok:#5fe0a1;--okbg:#14403a;--bad:#ff8da0;--badbg:#45212d;--gb:#4a1d3a;--gt:#ffb3d6;--scr:#0b1030}}
+:root[data-theme="dark"]{--bg:#13141c;--card:#1c1e2a;--ink:#eceef6;--mut:#a3a8bd;--line:#33374b;--pri:#8b8ff5;--pri-d:#5b5fcf;--pri-ink:#101126;--priL:#272b55;--priLd:#3b4080;--priT:#a8abff;--ok:#5fe0a1;--okbg:#14403a;--bad:#ff8da0;--badbg:#45212d;--gb:#4a1d3a;--gt:#ffb3d6;--scr:#0b1030}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;font:400 16px/1.5 "Be Vietnam Pro","Segoe UI",system-ui,sans-serif;color:var(--ink);background:var(--bg)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+button,select,input{font:inherit;color:var(--ink)}
+button{cursor:pointer}
+.shell{display:grid;grid-template-columns:250px minmax(0,1fr);min-height:100vh}
+.side{position:sticky;top:env(safe-area-inset-top,0px);height:100vh;border-right:1px solid var(--line);padding:18px 14px;display:flex;flex-direction:column;background:var(--bg);z-index:5}
+.logo{font-size:22px;padding:4px 10px 18px}
+#nav{display:flex;flex-direction:column;gap:6px;flex:1}
+.sp{flex:1}
+.nv{display:flex;align-items:center;gap:12px;padding:12px 14px;border:0;border-radius:10px;background:transparent;font-weight:500;color:var(--mut);text-align:left}
+.nv.on{background:var(--priL);color:var(--priT)}
+.top{display:flex;justify-content:space-between;align-items:center;padding:16px 24px}
+.gsel{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:10px;padding:8px 12px;background:var(--card)}
+.gsel i{width:22px;height:22px;border-radius:50%;background:#ff5a1f}
+.who{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:999px;padding:6px 16px 6px 8px;background:var(--card);font-weight:600;max-width:220px}
+.who b{width:30px;height:30px;border-radius:50%;background:var(--pri);color:var(--pri-ink);display:grid;place-items:center;font-size:15px;flex:none}
+.who span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rt{display:flex;align-items:center;gap:10px}
+.fire{border:1px solid var(--line);border-bottom-width:4px;border-radius:12px;padding:4px 14px;font-weight:700;background:var(--card)}
+.fire.off{color:var(--mut)}
+.sk{margin:0 0 8px}.sk b{font-size:28px}
+.wk{display:flex;gap:6px;margin-bottom:8px}.wk div{flex:1;text-align:center;font-size:12px;color:var(--mut)}
+.wk i{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;margin:3px auto 0;border:2px solid var(--line);font-style:normal;font-size:13px}
+.wk i.ok{background:var(--okbg);border-color:var(--ok);color:var(--ok);font-weight:700}
+.mut{color:var(--mut);font-size:14px}
+select{background:transparent;border:0;font-weight:500}
+option{background:var(--card);color:var(--ink)}
+.gm{border:1px solid var(--line);border-bottom-width:4px;border-radius:12px;padding:6px 16px;font-weight:700;font-size:18px;background:var(--card)}
+.cols{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:22px;padding:0 24px 40px;align-items:start}
+#aside{width:300px}#aside:empty{display:none}
+.hero{border:1px solid var(--line);border-radius:14px;padding:32px;box-shadow:0 2px 6px #0000001a;margin-bottom:24px;background:var(--card)}
+h1{font-size:32px;line-height:1.25;font-weight:700;margin:0 0 14px;max-width:700px}
+h2{font-size:24px;line-height:1.25;margin:0 0 8px}
+h3{font-size:18px;margin:0 0 10px}
+.hero p{margin:0 0 18px;max-width:640px}
+.steps{display:flex;align-items:center;margin-bottom:22px}
+.dot{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:14px;border:2px solid var(--line);background:var(--priL)}
+.dot.ok{background:var(--okbg);color:var(--ok);font-weight:700;border-color:var(--ok)}
+.ln{width:18px;height:2px;background:var(--line)}
+.btns{display:flex;gap:16px;flex-wrap:wrap}
+.btn{padding:14px 28px;border:0;border-radius:12px;background:var(--pri);color:var(--pri-ink);font-weight:700;font-size:17px;box-shadow:0 5px 0 var(--pri-d);margin-bottom:5px}
+.btn:active{transform:translateY(3px);box-shadow:0 2px 0 var(--pri-d)}
+.btn.alt{background:var(--priL);color:var(--priT);box-shadow:0 5px 0 var(--priLd)}
+.btns .btn{flex:1;min-width:150px;max-width:340px}
+.btn.sm{padding:8px 16px;font-size:15px;box-shadow:0 3px 0 var(--pri-d);margin:0}
+.btn.alt.sm{box-shadow:0 3px 0 var(--priLd)}
+.btn.wide{width:100%;margin-top:10px}
+.sh{display:flex;justify-content:space-between;align-items:center;margin:6px 0 12px}
+.sh h2{font-size:20px;margin:0}
+.gem{background:var(--gb);color:var(--gt);border-radius:999px;padding:2px 10px;font-size:14px;margin-left:8px}
+.lk{background:none;border:0;color:var(--priT);font-weight:700}
+.tc{display:flex;align-items:center;gap:14px;border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px;background:var(--card);flex-wrap:wrap}
+.ti{font-size:26px;width:46px;height:46px;display:grid;place-items:center;background:var(--priL);border-radius:12px}
+.tx{flex:1;min-width:160px}.tx b{display:block;font-weight:600}.tx small{color:var(--mut)}
+.bd{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px}
+.ta{display:flex;gap:8px;flex-wrap:wrap}
+.pn{border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:16px;background:var(--card)}
+.ph{display:flex;justify-content:space-between}
+.ph h3{font-size:20px;line-height:1.2;margin:0 0 8px}.ph span{font-size:30px}
+.pr{display:flex;align-items:center;padding:6px 0;font-size:15px}.pr b{margin-left:auto;font-weight:600}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:14px}
+.ls{margin:6px 0;max-width:64ch}
+.chips{display:flex;flex-wrap:nowrap;gap:8px;margin-bottom:14px;overflow-x:auto;padding:2px 2px 8px;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scroll-snap-type:x proximity;cursor:grab}
+.chips:active{cursor:grabbing}
+.chip{border:1px solid var(--line);border-radius:999px;background:var(--card);padding:6px 14px;font-size:14px;font-weight:500;flex:none;white-space:nowrap;scroll-snap-align:start}
+.chip.on{background:var(--pri);color:var(--pri-ink);border-color:var(--pri)}
+.qh{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+.meta{color:var(--mut);font-weight:600}
+.qq{font-size:28px;margin:6px 0 14px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opt{padding:14px 8px;font-size:24px;font-weight:700;border:2px solid var(--line);border-bottom-width:4px;border-radius:14px;background:var(--card)}
+.opt:not(:disabled):hover{border-color:var(--pri)}
+.opt.ok{background:var(--okbg);border-color:var(--ok);color:var(--ok)}
+.opt.bad{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+.opt:disabled{cursor:default}
+.msg{padding:10px 14px;border-radius:12px;margin:14px 0 10px;font-weight:600}
+.good{background:var(--okbg);color:var(--ok)}.oops{background:var(--badbg);color:var(--bad)}
+.video{border-radius:14px;overflow:hidden;background:var(--scr);color:var(--scr-ink)}
+.vb{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;font-size:15px}
+.vb button{background:transparent;border:1.5px solid #fff8;color:var(--scr-ink);border-radius:999px;padding:2px 12px;font-size:14px}
+.scr{min-height:190px;display:flex;align-items:center;justify-content:center;padding:6px 14px 14px;text-align:center}
+.st{animation:pop .35s ease-out}.st small{opacity:.75}
+.vis{font-size:34px;line-height:1.3;letter-spacing:2px;word-break:break-word;margin:4px 0;white-space:pre-line}
+.st p{margin:4px 0 0;font-size:19px;font-weight:600}
+.pg{height:6px;background:#fff3}.pg i{display:block;height:100%;width:0;background:var(--sun);transition:width .5s}
+.ytc{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:200px;border-radius:14px;background:var(--scr);color:var(--scr-ink);text-decoration:none;text-align:center;padding:20px}
+.ytc span{display:grid;place-items:center;width:64px;height:64px;border-radius:50%;background:#ff0033;font-size:26px;padding-left:4px}
+.ytc b{font-size:20px}.ytc small{opacity:.8}
+.yt{position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#000}
+.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.mine{width:100%;margin-top:10px;border-radius:14px;background:#000}
+.lnk{display:inline-block;margin-top:10px;color:var(--priT);font-weight:600}
+.ctr{text-align:center}.stars{font-size:44px;margin:6px 0}
+.hr{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}.hr span:first-child{flex:1}.hr small{color:var(--mut)}
+label{display:block;margin:14px 0 4px;font-weight:600}
+.fld{width:100%;max-width:320px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card)}
+@keyframes pop{from{transform:scale(.85);opacity:0}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.st{animation:none}.pg i{transition:none}}
+button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--pri);outline-offset:2px}
+@media (max-width:1080px){.cols{grid-template-columns:minmax(0,1fr)}#aside{width:100%}}
+@media (max-width:820px){.shell{grid-template-columns:minmax(0,1fr)}.side{height:auto;flex-direction:row;padding:8px 10px;overflow-x:auto;border-right:0;border-bottom:1px solid var(--line)}.logo{display:none}#nav{flex-direction:row;gap:4px;flex:none}.sp{display:none}.nv{padding:8px 12px;white-space:nowrap;font-size:14px}.top,.cols{padding-left:14px;padding-right:14px}.hero{padding:20px}h1{font-size:24px}}
+</style>
+</head>
+<body>
+<div class="shell">
+ <aside class="side"><div class="logo">🧮 <b>Toán vui</b></div><nav id="nav"></nav></aside>
+ <div>
+  <header class="top"><div class="gsel" id="gsel"></div><div class="rt"><span class="fire" id="fire"></span><button class="who" id="who" title="Mở cài đặt" onclick="go('set')"></button></div></header>
+  <div class="cols"><main id="app"></main><aside id="aside"></aside></div>
+ </div>
+</div>
+<script>
+// Video thật: bỏ file vào thư mục videos/ với tên là mã bài (vd videos/c10.mp4), hoặc thêm link vào VL: {c10:'https://...'}
+const VL={cn100:'https://youtu.be/lyeF7yY1lI8'};
+// Âm thanh: tự tạo bằng Web Audio, không cần file nào
+let AC;
+function sfx(k){
+ if(!D.sound)return;
+ try{
+  AC=AC||new(window.AudioContext||window.webkitAudioContext)();
+  if(AC.state==='suspended')AC.resume();
+  const n=AC.currentTime,
+  N={ok:[[660,0,.12],[880,.1,.25]],
+     bad:[[260,0,.16],[196,.15,.32]],
+     done:[[523,0,.14],[659,.14,.14],[784,.28,.14],[1047,.42,.4]]}[k]||[];
+  N.forEach(([f,s,d])=>{
+   const o=AC.createOscillator(),g=AC.createGain();
+   o.type=k==='bad'?'triangle':'sine';o.frequency.value=f;
+   g.gain.setValueAtTime(0.0001,n+s);
+   g.gain.linearRampToValueAtTime(.28,n+s+.02);
+   g.gain.exponentialRampToValueAtTime(.001,n+s+d);
+   o.connect(g);g.connect(AC.destination);
+   o.start(n+s);o.stop(n+s+d+.05);
+  });
+ }catch(e){}
+}
+const R=(a,b)=>Math.floor(Math.random()*(b-a+1))+a,P=a=>a[R(0,a.length-1)];
+const nd=n=>[n+1,n-1,n+2,n-2,n+10].filter(x=>x>=0&&x!==n);
+const fm=x=>x.toFixed(1).replace('.',',');
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const T=[
+{g:1,id:'c10',i:'➕',n:'Cộng trong phạm vi 10',learn:['Cộng là gộp hai nhóm lại thành một nhóm.','Ví dụ: 3 + 2. Có 3 quả táo, thêm 2 quả nữa, đếm lại được 5 quả.','Mẹo: giữ số lớn trong đầu rồi đếm tiếp số nhỏ.'],
+ gen(){const a=R(1,9),b=R(1,10-a),s=a+b;return{q:`${a} + ${b} = ?`,ans:s,w:nd(s),s:[[`Có ${a} quả táo`,'🍎'.repeat(a)],[`Thêm ${b} quả nữa`,'🍎'.repeat(a)+' ➕ '+'🍏'.repeat(b)],[`Đếm tất cả: ${a} + ${b} = ${s}`,'🍎'.repeat(a)+'🍏'.repeat(b)]]}}},
+{g:1,id:'t10',i:'➖',n:'Trừ trong phạm vi 10',learn:['Trừ là bớt đi một phần của nhóm.','Ví dụ: 7 − 3. Có 7 quả táo, ăn mất 3 quả, còn lại 4 quả.','Mẹo: gạch bớt các hình rồi đếm số hình còn lại.'],
+ gen(){const a=R(3,10),b=R(1,a-1),s=a-b;return{q:`${a} − ${b} = ?`,ans:s,w:nd(s),s:[[`Có ${a} quả táo`,'🍎'.repeat(a)],[`Ăn mất ${b} quả`,'🍎'.repeat(s)+'❌'.repeat(b)],[`Còn lại ${s} quả, vậy ${a} − ${b} = ${s}`,'🍎'.repeat(s)]]}}},
+{g:2,id:'n25',i:'✖️',n:'Bảng nhân 2 và 5',learn:['Nhân là cộng nhiều lần cùng một số.','Ví dụ: 5 × 3 = 5 + 5 + 5 = 15.','Mẹo: bảng nhân 5 luôn có tận cùng là 0 hoặc 5.'],
+ gen(){const n=P([2,5]),k=R(2,9),s=n*k;return{q:`${n} × ${k} = ?`,ans:s,w:[s+n,s-n,s+1,s-1],s:[[`${n} × ${k} nghĩa là cộng ${k} lần số ${n}`,'🟦'.repeat(k)],[`Cộng dần: ${n} + ${n} … (${k} lần)`,Array.from({length:k},(_,i)=>n*(i+1)).join(' → ')],[`Vậy ${n} × ${k} = ${s}`,'✅']]}}},
+{g:2,id:'cn100',i:'💯',n:'Cộng có nhớ trong 100',learn:['Cộng từ hàng đơn vị trước, rồi đến hàng chục.','Nếu hàng đơn vị cộng được 10 trở lên thì viết số lẻ và nhớ 1 sang hàng chục.','Ví dụ: 28 + 35. Đơn vị: 8 + 5 = 13, viết 3 nhớ 1. Chục: 2 + 3 + 1 = 6. Kết quả 63.'],
+ gen(){const ua=R(5,9),ub=R(10-ua,9),ta=R(1,4),tb=R(1,4),a=ta*10+ua,b=tb*10+ub,s=a+b,u=ua+ub;return{q:`${a} + ${b} = ?`,ans:s,w:[s-10,s+10,s+1,s-1],s:[['Cộng hàng đơn vị trước',`${ua} + ${ub} = ${u}`],[`Viết ${u-10}, nhớ 1 sang hàng chục`,`${u} → viết ${u-10}, nhớ 1`],[`Cộng hàng chục: ${ta} + ${tb} + 1 = ${ta+tb+1}`,`${a} + ${b} = ${s}`]]}}},
+{g:3,id:'chia',i:'➗',n:'Phép chia trong bảng',learn:['Chia là tìm xem một số gồm bao nhiêu nhóm bằng nhau.','Ví dụ: 24 ÷ 4 = ? Nhớ bảng nhân: 4 × 6 = 24, nên 24 ÷ 4 = 6.','Mẹo: phép chia là phép nhân đi ngược lại.'],
+ gen(){const b=R(2,9),c=R(2,9),p=b*c;return{q:`${p} ÷ ${b} = ?`,ans:c,w:nd(c),s:[[`Tìm số nhân với ${b} để được ${p}`,`${b} × ? = ${p}`],[`Nhớ bảng nhân: ${b} × ${c} = ${p}`,'🧠'],[`Vậy ${p} ÷ ${b} = ${c}`,'✅']]}}},
+{g:3,id:'cv',i:'▭',n:'Chu vi hình chữ nhật',learn:['Chu vi là độ dài đường bao quanh hình.','Công thức: chu vi = (chiều dài + chiều rộng) × 2.','Ví dụ: dài 8 cm, rộng 5 cm thì chu vi = (8 + 5) × 2 = 26 cm.'],
+ gen(){const l=R(5,12),w=R(2,l-1),s=(l+w)*2;return{q:`Hình chữ nhật dài ${l} cm, rộng ${w} cm. Chu vi là mấy cm?`,ans:s,w:[l*w,l+w,s+2,s-2],s:[['Công thức: (dài + rộng) × 2','▭'],[`Dài + rộng = ${l} + ${w} = ${l+w}`,`${l} + ${w}`],[`Nhân 2: ${l+w} × 2 = ${s} cm`,'✅']]}}},
+{g:4,id:'ps',i:'🍕',n:'Cộng phân số cùng mẫu',learn:['Phân số có tử số (trên) và mẫu số (dưới).','Cộng hai phân số cùng mẫu: giữ nguyên mẫu số, cộng hai tử số.','Ví dụ: 2/7 + 3/7 = 5/7.'],
+ gen(){const d=R(4,10),a=R(1,d-3),b=R(1,d-a-1),t=a+b;return{q:`${a}/${d} + ${b}/${d} = ?`,ans:`${t}/${d}`,w:[`${t}/${2*d}`,`${a*b}/${d}`,`${t-1}/${d}`,`${t+1}/${d}`],s:[['Mẫu số giống nhau thì giữ nguyên mẫu số',`${'🟧'.repeat(a)}${'🟨'.repeat(b)}${'⬜'.repeat(d-t)}`],[`Cộng hai tử số: ${a} + ${b} = ${t}`,`${a} + ${b} = ${t}`],[`Kết quả: ${t}/${d}`,'✅']]}}},
+{g:3,id:'nhan',i:'🔢',n:'Nhân số có hai chữ số với số có một chữ số',learn:['Tách số có hai chữ số thành chục và đơn vị.','Ví dụ: 23 × 4 = 20 × 4 + 3 × 4 = 80 + 12 = 92.','Mẹo: nhân từng phần rồi cộng lại, sẽ ít nhầm hơn.'],
+ gen(){const a=R(12,49),b=R(2,9),t=a-a%10,u=a%10,s=a*b;return{q:`${a} × ${b} = ?`,ans:s,w:[t*b+u,s+10,s-10,t+u*b],s:[[`Tách ${a} = ${t} + ${u}`,`${a} = ${t} + ${u}`],[`Nhân từng phần: ${t} × ${b} = ${t*b} và ${u} × ${b} = ${u*b}`,`${t*b}  |  ${u*b}`],[`Cộng lại: ${t*b} + ${u*b} = ${s}`,'✅']]}}},
+{g:5,id:'tp',i:'🔟',n:'Cộng số thập phân',learn:['Số thập phân có dấu phẩy ngăn phần nguyên và phần thập phân.','Khi cộng, viết các số thẳng hàng dấu phẩy, rồi cộng như số tự nhiên.','Ví dụ: 2,4 + 1,7 = 4,1.'],
+ gen(){const a=R(11,89),b=R(11,89),s=a+b;return{q:`${fm(a/10)} + ${fm(b/10)} = ?`,ans:fm(s/10),w:[fm((s+1)/10),fm((s-1)/10),fm((s+10)/10),fm((s-10)/10)],s:[['Viết thẳng hàng dấu phẩy',`${fm(a/10)}\n+ ${fm(b/10)}`],[`Cộng như số tự nhiên: ${a} + ${b} = ${s}`,`${a} + ${b} = ${s}`],[`Đặt lại dấu phẩy: ${fm(s/10)}`,'✅']]}}},
+{g:5,id:'pt',i:'％',n:'Tìm phần trăm của một số',learn:['Phần trăm là số phần trong 100 phần bằng nhau.','Muốn tìm p% của n: lấy n × p rồi chia cho 100.','Ví dụ: 25% của 80 = 80 × 25 ÷ 100 = 20.'],
+ gen(){const p=P([10,20,25,50]),n=P([40,80,120,200]),s=n*p/100;return{q:`${p}% của ${n} là bao nhiêu?`,ans:s,w:[n/p,n-s,s*2,s+p],s:[[`${p}% nghĩa là ${p} phần trong 100 phần`,`${p}% = ${p}/100`],[`Tính: ${n} × ${p} = ${n*p}`,`${n} × ${p}`],[`Chia cho 100: ${n*p} ÷ 100 = ${s}`,'✅']]}}}
+];
+const fx=x=>String(x).replace(/\B(?=(\d{3})+(?!\d))/g,' '),fd=v=>String(+v.toFixed(3)).replace('.',',');
+const SG=it=>()=>{const x=P(it),o=it.filter(y=>y!==x).sort(()=>Math.random()-.5),r=R(0,1);return{q:r?`${x[1]} là hình hay khối nào?`:`${x[2]}. Đó là gì?`,ans:x[0],w:o.map(y=>y[0]),s:[[r?'Nhìn hình dạng của vật':'Đọc kĩ đặc điểm của hình',r?x[1]:x[2]],[`Đặc điểm: ${x[2]}`,x[1]],[`Đó là ${x[0]}`,'✅']]}};
+T.push(
+{g:1,id:'so10',i:'⚖️',n:'So sánh các số trong phạm vi 10',learn:['So sánh hai số: số nào đứng sau trong dãy đếm thì lớn hơn.','Dấu > nghĩa là lớn hơn, dấu < nghĩa là bé hơn, dấu = nghĩa là bằng nhau.','Ví dụ: 7 > 4 vì 7 có nhiều hơn 4.'],
+ gen(){const a=R(0,10),b=R(0,10),r=a>b?'>':a<b?'<':'=';return{q:`Điền dấu thích hợp: ${a} … ${b}`,ans:r,w:['>','<','='],s:[[`Đếm và so sánh ${a} với ${b}`,'🔵'.repeat(a)+'\n'+'🔴'.repeat(b)],[a>b?`${a} nhiều hơn ${b}, nên ${a} > ${b}`:a<b?`${a} ít hơn ${b}, nên ${a} < ${b}`:`Hai số bằng nhau: ${a} = ${b}`,'✅']]}}},
+{g:1,id:'so100',i:'🔢',n:'Các số đến 100',learn:['Số có hai chữ số gồm chục và đơn vị.','Ví dụ: 47 gồm 4 chục và 7 đơn vị.','Số liền sau hơn số đó 1 đơn vị, số liền trước kém số đó 1 đơn vị.'],
+ gen(){const n=R(11,99),t=Math.floor(n/10),u=n%10;return{q:`Số ${n} gồm mấy chục và mấy đơn vị?`,ans:`${t} chục ${u} đơn vị`,w:[`${u} chục ${t} đơn vị`,`${t+1} chục ${u} đơn vị`,`${t} chục ${(u+1)%10} đơn vị`],s:[[`Số ${n} có hai chữ số`,`${n}`],[`Chữ số hàng chục là ${t}, hàng đơn vị là ${u}`,`${t} chục  |  ${u} đơn vị`],[`Vậy ${n} gồm ${t} chục ${u} đơn vị`,'✅']]}}},
+{g:2,id:'qua10',i:'🔟',n:'Cộng, trừ qua 10 trong phạm vi 20',learn:['Cộng qua 10: tách số để đủ 10 trước, rồi cộng phần còn lại.','Ví dụ: 8 + 5 = 8 + 2 + 3 = 10 + 3 = 13.','Trừ qua 10: trừ để về 10 trước, rồi trừ tiếp. Ví dụ: 13 − 5 = 13 − 3 − 2 = 10 − 2 = 8.'],
+ gen(){if(R(0,1)){const a=R(6,9),b=R(11-a,9),s=a+b,k=10-a;return{q:`${a} + ${b} = ?`,ans:s,w:nd(s),s:[[`Tách ${b} = ${k} + ${b-k} để ${a} + ${k} đủ 10`,`${a} + ${k} = 10`],[`Còn lại ${b-k}: 10 + ${b-k} = ${s}`,`10 + ${b-k}`],[`Vậy ${a} + ${b} = ${s}`,'✅']]}}const a=R(11,18),b=R(a-9,9),s=a-b,k=a-10;return{q:`${a} − ${b} = ?`,ans:s,w:nd(s),s:[[`Trừ ${k} trước để về 10`,`${a} − ${k} = 10`],[`Còn phải trừ ${b-k}: 10 − ${b-k} = ${s}`,`10 − ${b-k}`],[`Vậy ${a} − ${b} = ${s}`,'✅']]}}},
+{g:2,id:'tru100',i:'➖',n:'Trừ có nhớ trong phạm vi 100',learn:['Nếu chữ số hàng đơn vị của số bị trừ bé hơn số trừ thì mượn 1 chục (bằng 10 đơn vị).','Ví dụ: 52 − 17. Đơn vị: 12 − 7 = 5. Chục: 5 − 1 − 1 = 3. Kết quả 35.'],
+ gen(){const ua=R(0,8),ub=R(ua+1,9),ta=R(2,9),tb=R(1,ta-1),a=ta*10+ua,b=tb*10+ub,s=a-b;return{q:`${a} − ${b} = ?`,ans:s,w:nd(s),s:[['Hàng đơn vị không trừ được, mượn 1 chục',`${ua+10} − ${ub} = ${ua+10-ub}`],[`Hàng chục: ${ta} − 1 (đã mượn) − ${tb} = ${ta-1-tb}`,`${ta-1-tb} chục`],[`Vậy ${a} − ${b} = ${s}`,'✅']]}}},
+{g:2,id:'so1000',i:'🧱',n:'Các số trong phạm vi 1000',learn:['Số có ba chữ số gồm trăm, chục và đơn vị.','Ví dụ: 352 gồm 3 trăm, 5 chục và 2 đơn vị, và 352 = 300 + 50 + 2.','So sánh: số nào có nhiều chữ số hơn thì lớn hơn; cùng số chữ số thì so từng hàng từ trái sang phải.'],
+ gen(){const h=R(1,9),t=R(0,9),u=R(0,9),n=h*100+t*10+u;return{q:`${h} trăm ${t} chục ${u} đơn vị là số nào?`,ans:n,w:[h*100+u*10+t,t*100+h*10+u,n+10,n+100],s:[[`${h} trăm = ${h*100}`,`${h*100}`],[`${t} chục = ${t*10} và ${u} đơn vị = ${u}`,`${t*10} + ${u}`],[`${h*100} + ${t*10} + ${u} = ${n}`,'✅']]}}},
+{g:3,id:'bn',i:'✖️',n:'Bảng nhân 6, 7, 8, 9',learn:['Bảng nhân 6, 7, 8, 9 giúp tính nhanh nhiều lần cộng.','Ví dụ: 7 × 8 = 56; 9 × 6 = 54.','Mẹo: đổi chỗ hai thừa số thì tích không đổi, ví dụ 6 × 9 = 9 × 6.'],
+ gen(){const a=P([6,7,8,9]),b=R(2,9),s=a*b;return{q:`${a} × ${b} = ?`,ans:s,w:[s+a,s-a,s+b,s-b],s:[[`${a} × ${b} nghĩa là ${b} nhóm, mỗi nhóm ${a}`,'🟩'.repeat(b)],[`Cộng dần ${a} lên ${b} lần`,Array.from({length:b},(_,i)=>a*(i+1)).join(' → ')],[`Vậy ${a} × ${b} = ${s}`,'✅']]}}},
+{g:3,id:'dt',i:'🟦',n:'Diện tích hình chữ nhật, hình vuông',learn:['Diện tích là phần mặt phẳng mà hình chiếm. Đơn vị diện tích: cm² (xăng-ti-mét vuông).','Diện tích hình chữ nhật = chiều dài × chiều rộng.','Diện tích hình vuông = cạnh × cạnh.'],
+ gen(){const sq=R(0,1),l=R(3,12),w=sq?l:R(2,l-1),s=l*w;return{q:sq?`Hình vuông cạnh ${l} cm. Diện tích là bao nhiêu cm²?`:`Hình chữ nhật dài ${l} cm, rộng ${w} cm. Diện tích là bao nhiêu cm²?`,ans:s,w:sq?[4*l,2*l,s+l,s-l]:[(l+w)*2,l+w,s+l,s-w],s:[[sq?'Diện tích hình vuông = cạnh × cạnh':'Diện tích hình chữ nhật = dài × rộng','▭'],[`${l} × ${w} = ${s}`,`${l} × ${w}`],[`Diện tích là ${s} cm²`,'✅']]}}},
+{g:4,id:'lamtron',i:'🎯',n:'Làm tròn số',learn:['Làm tròn đến hàng chục, hàng trăm, hàng nghìn… là thay số bằng số tròn gần nhất.','Nhìn chữ số ở hàng bên phải: từ 5 trở lên thì làm tròn lên, dưới 5 thì giữ nguyên.','Ví dụ: 4 372 làm tròn đến hàng trăm là 4 400.'],
+ gen(){const n=R(1000,9999),p=P([10,100,1000]),nm={10:'chục',100:'trăm',1000:'nghìn'}[p],fl=Math.floor(n/p)*p,a=Math.round(n/p)*p,nx=Math.floor(n/(p/10))%10;return{q:`Làm tròn số ${fx(n)} đến hàng ${nm}`,ans:fx(a),w:[fl===a?fl+p:fl,a+p,a-p,a+p/10].filter(x=>x>0).map(fx),s:[[`Tìm hàng ${nm}, rồi nhìn chữ số bên phải nó`,fx(n)],[`Chữ số bên phải là ${nx}: ${nx>=5?'từ 5 trở lên nên làm tròn lên':'dưới 5 nên giữ nguyên'}`,`${nx}`],[`Kết quả: ${fx(a)}`,'✅']]}}},
+{g:4,id:'bt',i:'🧩',n:'Tính giá trị biểu thức',learn:['Biểu thức có dấu ngoặc: tính trong ngoặc trước.','Biểu thức không có ngoặc: nhân, chia trước; cộng, trừ sau.','Ví dụ: 3 + 4 × 2 = 3 + 8 = 11; (3 + 4) × 2 = 14.'],
+ gen(){const a=R(2,9),b=R(2,9),c=R(2,9);if(R(0,1)){const s=a+b*c;return{q:`${a} + ${b} × ${c} = ?`,ans:s,w:[(a+b)*c,s+1,s-1,a*b+c],s:[['Nhân trước, cộng sau',`${a} + ${b} × ${c}`],[`${b} × ${c} = ${b*c}`,`${a} + ${b*c}`],[`${a} + ${b*c} = ${s}`,'✅']]}}const s=(a+b)*c;return{q:`(${a} + ${b}) × ${c} = ?`,ans:s,w:[a+b*c,s+c,s-c,a*c+b],s:[['Tính trong ngoặc trước',`(${a} + ${b}) × ${c}`],[`${a} + ${b} = ${a+b}`,`${a+b} × ${c}`],[`${a+b} × ${c} = ${s}`,'✅']]}}},
+{g:4,id:'nhan2',i:'🧮',n:'Nhân với số có hai chữ số',learn:['Nhân với số có hai chữ số: nhân với chữ số hàng đơn vị, nhân với chục, rồi cộng hai kết quả.','Ví dụ: 23 × 12 = 23 × 2 + 23 × 10 = 46 + 230 = 276.'],
+ gen(){const a=R(12,59),b=R(11,29),u=b%10,c=b-u,s=a*b;return{q:`${a} × ${b} = ?`,ans:s,w:[a*u+a*Math.floor(b/10),s+10,s-10,s+a],s:[[`Tách ${b} = ${u} + ${c}`,`${b} = ${u} + ${c}`],[`${a} × ${u} = ${a*u} và ${a} × ${c} = ${a*c}`,`${a*u}  |  ${a*c}`],[`Cộng lại: ${a*u} + ${a*c} = ${s}`,'✅']]}}},
+{g:4,id:'dvd',i:'⚖️',n:'Đổi đơn vị đo khối lượng',learn:['1 yến = 10 kg; 1 tạ = 100 kg; 1 tấn = 1 000 kg.','Đổi từ đơn vị lớn ra đơn vị bé thì nhân; đổi từ đơn vị bé ra đơn vị lớn thì chia.','Ví dụ: 3 tạ = 3 × 100 = 300 kg.'],
+ gen(){const u=P([['yến',10],['tạ',100],['tấn',1000]]),n=R(2,9),s=n*u[1];return{q:`${n} ${u[0]} = … kg`,ans:s,w:[s*10,s/10,s+u[1],s-u[1]],s:[[`1 ${u[0]} = ${u[1]} kg`,'⚖️'],[`${n} ${u[0]} = ${n} × ${u[1]}`,`${n} × ${u[1]}`],[`${n} ${u[0]} = ${s} kg`,'✅']]}}},
+{g:5,id:'nhantp',i:'✖️',n:'Nhân số thập phân với 10, 100, 1000',learn:['Nhân một số thập phân với 10, 100, 1000… ta chuyển dấu phẩy sang bên phải 1, 2, 3… chữ số.','Ví dụ: 3,45 × 10 = 34,5; 3,45 × 100 = 345.'],
+ gen(){const x=R(101,999),k=P([10,100,1000]),z=String(k).length-1;return{q:`${fd(x/100)} × ${k} = ?`,ans:fd(x*k/100),w:[x*k/1000,x*k/10,x*k/10000].map(fd),s:[[`Nhân với ${k}: chuyển dấu phẩy sang phải ${z} chữ số`,`${fd(x/100)} → ?`],['Nếu thiếu chữ số thì thêm chữ số 0',''],[`Kết quả: ${fd(x*k/100)}`,'✅']]}}},
+{g:5,id:'dttg',i:'🔺',n:'Diện tích hình tam giác',learn:['Chiều cao của tam giác là đoạn vuông góc hạ từ đỉnh xuống đáy.','Diện tích tam giác = đáy × chiều cao ÷ 2.','Ví dụ: đáy 6 cm, chiều cao 4 cm thì diện tích = 6 × 4 ÷ 2 = 12 cm².'],
+ gen(){const a=R(3,12),h=2*R(2,6),s=a*h/2;return{q:`Tam giác có đáy ${a} cm, chiều cao ${h} cm. Diện tích là bao nhiêu cm²?`,ans:s,w:[a*h,a+h,s+a,s-h],s:[['Diện tích = đáy × chiều cao ÷ 2','🔺'],[`${a} × ${h} = ${a*h}`,`${a} × ${h}`],[`${a*h} ÷ 2 = ${s} cm²`,'✅']]}}},
+{g:5,id:'vantoc',i:'🚗',n:'Quãng đường, vận tốc, thời gian',learn:['Vận tốc cho biết quãng đường đi được trong một đơn vị thời gian, ví dụ 40 km/giờ.','Quãng đường = vận tốc × thời gian.','Ví dụ: ô tô đi 50 km/giờ trong 3 giờ thì đi được 50 × 3 = 150 km.'],
+ gen(){const v=P([30,40,45,50,60]),t=R(2,6),s=v*t;return{q:`Một ô tô đi với vận tốc ${v} km/giờ trong ${t} giờ. Quãng đường đi được là bao nhiêu km?`,ans:s,w:[v+t,s+v,s-v,s+t],s:[['Quãng đường = vận tốc × thời gian','🚗'],[`${v} × ${t} = ${s}`,`${v} km × ${t} giờ`],[`Ô tô đi được ${s} km`,'✅']]}}},
+{g:1,id:'hinh1',i:'🔺',n:'Làm quen với hình phẳng và hình khối',learn:['Hình vuông có 4 cạnh bằng nhau; hình chữ nhật có 4 cạnh, hai cạnh dài bằng nhau và hai cạnh ngắn bằng nhau.','Hình tam giác có 3 cạnh; hình tròn không có cạnh.','Khối lập phương có 6 mặt đều là hình vuông; khối hộp chữ nhật có 6 mặt là các hình chữ nhật.'],
+ gen:SG([['hình vuông','🟦','Hình có 4 cạnh bằng nhau và 4 góc vuông'],['hình chữ nhật','▭','Hình có 4 cạnh, hai cạnh dài bằng nhau và hai cạnh ngắn bằng nhau'],['hình tam giác','🔺','Hình có 3 cạnh và 3 góc'],['hình tròn','🔵','Hình không có cạnh, có dạng tròn đều'],['khối lập phương','🎲','Khối có 6 mặt đều là hình vuông'],['khối hộp chữ nhật','📦','Khối có 6 mặt là các hình chữ nhật']])},
+{g:2,id:'hinh2',i:'🥫',n:'Đoạn thẳng, đường gấp khúc, hình tứ giác, khối trụ, khối cầu',learn:['Khối trụ giống cái lon sữa, khối cầu giống quả bóng.','Hình tứ giác có 4 cạnh và 4 đỉnh.','Đoạn thẳng có hai đầu; đường thẳng kéo dài về hai phía; đường gấp khúc gồm các đoạn thẳng nối liền nhau.'],
+ gen:SG([['khối trụ','🥫','Khối có hai mặt đáy là hình tròn, giống cái lon sữa'],['khối cầu','⚽','Khối tròn đều mọi phía, giống quả bóng'],['hình tứ giác','⬜','Hình có 4 cạnh và 4 đỉnh'],['đường gấp khúc','〰️','Hình gồm các đoạn thẳng nối liền nhau'],['đoạn thẳng','📏','Đường thẳng có điểm đầu và điểm cuối'],['đường thẳng','↔️','Đường không có điểm đầu và điểm cuối, kéo dài về hai phía']])},
+{g:2,id:'lit',i:'🥛',n:'Lít và ki-lô-gam',learn:['Lít (viết tắt: l) dùng để đo dung tích, ví dụ lượng nước trong chai, trong thùng.','Ki-lô-gam (kg) dùng để đo khối lượng, ví dụ cân gạo, cân rau.','Tính với số đo có đơn vị: cộng, trừ các số rồi viết đơn vị vào kết quả. Ví dụ: 5 l + 3 l = 8 l.'],
+ gen(){const L=R(0,1),u=L?'lít':'ki-lô-gam',o=L?'nước':'gạo',a=R(8,20),b=R(2,7),p=R(0,1),s=p?a+b:a-b;return{q:p?`Thùng thứ nhất có ${a} ${u} ${o}, thùng thứ hai có ${b} ${u} ${o}. Cả hai thùng có bao nhiêu ${u}?`:`Có ${a} ${u} ${o}, đã dùng ${b} ${u}. Còn lại bao nhiêu ${u}?`,ans:s,w:nd(s),s:[[p?'Gộp hai thùng lại: làm phép cộng':'Dùng đi nghĩa là bớt: làm phép trừ',L?'🥛':'🌾'],[`${a} ${p?'+':'−'} ${b} = ${s}`,`${a} ${p?'+':'−'} ${b}`],[`Đáp số: ${s} ${u}`,'✅']]}}},
+{g:2,id:'gio',i:'⏰',n:'Ngày, giờ, phút',learn:['Kim ngắn chỉ giờ, kim dài chỉ phút. Kim dài chỉ số 12 là giờ đúng, chỉ số 6 là 30 phút (giờ rưỡi).','1 giờ = 60 phút; 1 ngày = 24 giờ; 1 tuần lễ = 7 ngày.','Ví dụ: kim ngắn chỉ số 3, kim dài chỉ số 12 thì đồng hồ chỉ 3 giờ.'],
+ gen(){const k=R(0,2);if(k===2){const f=P([['Một ngày có … giờ',24,[12,60,48]],['Một giờ có … phút',60,[30,100,12]],['Một tuần lễ có … ngày',7,[5,10,30]]]);return{q:f[0],ans:f[1],w:f[2],s:[['Ghi nhớ kiến thức này',f[0].replace('…',f[1])],[`Đáp án đúng là ${f[1]}`,'✅']]}}const h=R(1,12),e=k?['🕧','🕜','🕝','🕞','🕟','🕠','🕡','🕢','🕣','🕤','🕥','🕦'][h%12]:['🕛','🕐','🕑','🕒','🕓','🕔','🕕','🕖','🕗','🕘','🕙','🕚'][h%12],t=k?' 30 phút':'',a=`${h} giờ${t}`;return{q:`Đồng hồ ${e} chỉ mấy giờ?`,ans:a,w:[`${h%12+1} giờ${t}`,`${(h+10)%12+1} giờ${t}`,k?`${h} giờ`:`${h} giờ 30 phút`],s:[['Kim ngắn chỉ giờ, kim dài chỉ phút',e],[k?'Kim dài chỉ số 6 nghĩa là 30 phút':'Kim dài chỉ số 12 nghĩa là giờ đúng',e],[`Đồng hồ chỉ ${a}`,'✅']]}}},
+{g:3,id:'so1000b',i:'🔢',n:'Các số đến 1000: đếm thêm, số liền trước, số liền sau',learn:['Đếm thêm: đếm thêm 5, 10 hoặc 100 vào số vừa đếm.','Số liền sau hơn số đó 1 đơn vị, số liền trước kém số đó 1 đơn vị.','Ví dụ: đếm thêm 100 từ 235: 235, 335, 435, 535.'],
+ gen(){if(R(0,1)){const n=R(101,998),f=R(0,1);return{q:`Số liền ${f?'sau':'trước'} của ${n} là số nào?`,ans:f?n+1:n-1,w:[n,f?n+2:n-2,f?n-1:n+1,f?n+10:n-10],s:[[`Số liền ${f?'sau':'trước'} ${f?'hơn':'kém'} số đã cho 1 đơn vị`,`${n}`],[`${n} ${f?'+':'−'} 1 = ${f?n+1:n-1}`,''],['Đó là đáp án','✅']]}}const d=P([5,10,100]),n=R(100,400);return{q:`Đếm thêm ${d}: ${n}, ${n+d}, ${n+2*d}, …?`,ans:n+3*d,w:[n+4*d,n+3*d+(d===100?10:1),n+2*d,n+3*d-1],s:[[`Mỗi số hơn số đứng trước ${d} đơn vị`,`${n} → ${n+d} → ${n+2*d}`],[`${n+2*d} + ${d} = ${n+3*d}`,''],['Đó là đáp án','✅']]}}},
+{g:3,id:'chia100',i:'➗',n:'Chia số có hai chữ số cho số có một chữ số',learn:['Chia số có hai chữ số cho số có một chữ số: chia lần lượt từ hàng chục đến hàng đơn vị.','Nếu còn thừa thì đó là số dư; số dư luôn bé hơn số chia.','Ví dụ: 47 ÷ 5 = 9 (dư 2) vì 5 × 9 = 45 và 47 − 45 = 2.'],
+ gen(){const b=R(2,9),a=R(0,1)?b*R(Math.ceil(20/b),Math.floor(99/b)):R(20,99),c=Math.floor(a/b),r=a%b,s=r?`${c} (dư ${r})`:`${c}`;return{q:`${a} ÷ ${b} = ?`,ans:s,w:[r?`${c} (dư ${r+1})`:`${c} (dư 1)`,`${c+1}`,`${c-1}`,r?`${c+1} (dư ${r})`:`${c+10}`],s:[[`Tìm số lớn nhất nhân với ${b} mà không vượt quá ${a}`,`${b} × ${c} = ${b*c}`],[`${a} − ${b*c} = ${r}`,r?`dư ${r}`:'chia hết'],[`Vậy ${a} ÷ ${b} = ${s}`,'✅']]}}},
+{g:4,id:'goc',i:'📐',n:'Đo góc: góc nhọn, góc vuông, góc tù, góc bẹt',learn:['Góc có số đo tính bằng độ (kí hiệu °).','Góc vuông bằng 90°; góc nhọn bé hơn 90°; góc tù lớn hơn 90° và bé hơn 180°; góc bẹt bằng 180°.','Ví dụ: góc 120° lớn hơn 90° và bé hơn 180° nên là góc tù.'],
+ gen(){const a=P([R(10,80),90,R(100,170),180]),ans=a<90?'góc nhọn':a===90?'góc vuông':a<180?'góc tù':'góc bẹt',why=a<90?'bé hơn 90°':a===90?'bằng 90°':a<180?'lớn hơn 90° và bé hơn 180°':'bằng 180°';return{q:`Góc có số đo ${a}° là góc gì?`,ans,w:['góc nhọn','góc vuông','góc tù','góc bẹt'].filter(x=>x!==ans),s:[['Nhớ: góc vuông 90°, góc bẹt 180°','📐'],[`${a}° ${why}`,`${a}°`],[`Vậy đây là ${ans}`,'✅']]}}}
+);
+// Thứ tự bài theo mạch kiến thức SGK
+const ORD='so10,hinh1,c10,t10,so100,qua10,cn100,tru100,lit,n25,hinh2,so1000,gio,so1000b,bn,chia,nhan,chia100,cv,dt,lamtron,bt,nhan2,goc,dvd,ps,tp,nhantp,dttg,pt,vantoc'.split(',');
+T.sort((a,b)=>a.g-b.g||ORD.indexOf(a.id)-ORD.indexOf(b.id));
+// Biến thể câu hỏi: mỗi bài có nhiều dạng câu để mỗi lượt quiz đa dạng hơn
+const NM=['Mai','Nam','Lan','Hùng','Bình','An','Hoa','Minh','Việt','Linh','Tú','Đào'],OB=[['quả táo','🍎'],['viên bi','🔵'],['cái kẹo','🍬'],['quyển vở','📒'],['bông hoa','🌸'],['chiếc bút','🖊️'],['quả cam','🍊'],['con tem','✉️']];
+const two=()=>{const a=P(NM);let b=P(NM);while(b===a)b=P(NM);return[a,b]};
+const tri=(lo,hi)=>{const s=new Set();while(s.size<3)s.add(R(lo,hi));return[...s]};
+const ops=(pf,op)=>{const ad=op==='+',sg=ad?'+':'−',pr=()=>{const[a,b]=pf();return[a,b,ad?a+b:a-b]};return[
+ ()=>{const[a,b,s]=pr(),[n1,n2]=two(),o=P(OB);return{q:ad?`${n1} có ${a} ${o[0]}, ${n2} cho thêm ${b} ${o[0]}. Hỏi ${n1} có tất cả bao nhiêu ${o[0]}?`:`${n1} có ${a} ${o[0]}, cho ${n2} ${b} ${o[0]}. Hỏi ${n1} còn lại bao nhiêu ${o[0]}?`,ans:s,w:nd(s),s:[[ad?'Thêm vào thì làm phép cộng':'Cho đi thì làm phép trừ',o[1].repeat(Math.min(a,10))],[`${a} ${sg} ${b} = ${s}`,`${a} ${sg} ${b}`],[`Đáp số: ${s} ${o[0]}`,'✅']]}},
+ ()=>{const[a,b,s]=pr(),k=R(0,1),x=k?a:b;return{q:k?`Số thích hợp: … ${sg} ${b} = ${s}`:`Số thích hợp: ${a} ${sg} … = ${s}`,ans:x,w:nd(x),s:[[k?(ad?'Số hạng chưa biết = tổng − số hạng đã biết':'Số bị trừ = hiệu + số trừ'):(ad?'Số hạng chưa biết = tổng − số hạng đã biết':'Số trừ = số bị trừ − hiệu'),'🔍'],[k?(ad?`${s} − ${b} = ${a}`:`${s} + ${b} = ${a}`):(ad?`${s} − ${a} = ${b}`:`${a} − ${s} = ${b}`),`${x}`],['Thử lại bằng phép tính ban đầu','✅']]}},
+ ()=>{const[a,b,s]=pr();return{q:'Phép tính nào đúng?',ans:`${a} ${sg} ${b} = ${s}`,w:[`${a} ${sg} ${b} = ${s+1}`,`${a} ${sg} ${b} = ${s+2}`,`${a} ${sg} ${b} = ${s+10}`],s:[[`Tính ${a} ${sg} ${b}`,`${a} ${sg} ${b}`],[`Kết quả đúng là ${s}`,'🔎'],['Chọn phép tính có kết quả đúng','✅']]}}]};
+const mul=pf=>[
+ ()=>{const[a,b]=pf(),p=a*b,[n1]=two(),o=P(OB);return{q:`Mỗi hộp có ${a} ${o[0]}. ${n1} có ${b} hộp như vậy. Hỏi ${n1} có tất cả bao nhiêu ${o[0]}?`,ans:p,w:[p+a,p-a,a+b,p+b],s:[['Nhiều hộp bằng nhau thì làm phép nhân',o[1].repeat(Math.min(a,8))],[`${a} × ${b} = ${p}`,`${a} × ${b}`],[`Đáp số: ${p} ${o[0]}`,'✅']]}},
+ ()=>{const[a,b]=pf(),p=a*b,k=R(0,1),x=k?a:b;return{q:k?`Số thích hợp: … × ${b} = ${p}`:`Số thích hợp: ${a} × … = ${p}`,ans:x,w:nd(x),s:[['Thừa số chưa biết = tích ÷ thừa số đã biết','🔍'],[k?`${p} ÷ ${b} = ${a}`:`${p} ÷ ${a} = ${b}`,`${x}`],['Thử lại bằng phép nhân','✅']]}},
+ ()=>{const[a,b]=pf(),p=a*b,[n1]=two(),o=P(OB);return{q:`${n1} có ${p} ${o[0]}, chia đều cho ${a} bạn. Mỗi bạn được bao nhiêu ${o[0]}?`,ans:b,w:nd(b),s:[['Chia đều thì làm phép chia',o[1].repeat(Math.min(p,10))],[`${p} ÷ ${a} = ${b} vì ${a} × ${b} = ${p}`,`${p} ÷ ${a}`],[`Mỗi bạn được ${b} ${o[0]}`,'✅']]}}];
+const EX={
+so10:[()=>{const[a,b,c]=tri(0,10),k=R(0,1),r=k?Math.max(a,b,c):Math.min(a,b,c);return{q:`Số ${k?'lớn':'bé'} nhất trong các số ${a}, ${b}, ${c} là số nào?`,ans:r,w:[a,b,c,r+1],s:[['So sánh từng số với nhau',`${a}   ${b}   ${c}`],[`Số ${k?'lớn':'bé'} nhất là ${r}`,'✅']]}}],
+c10:ops(()=>{const a=R(1,9);return[a,R(1,10-a)]},'+'),
+t10:ops(()=>{const a=R(3,10);return[a,R(1,a-1)]},'−'),
+so100:[()=>{const t=R(1,9),u=R(0,9),n=t*10+u;return{q:`Số gồm ${t} chục và ${u} đơn vị là số nào?`,ans:n,w:[u*10+t,n+10,n-10,n+1],s:[[`${t} chục = ${t*10}`,`${t*10}`],[`${t*10} + ${u} = ${n}`,''],['Đó là đáp án','✅']]}},()=>{const n=R(11,98),f=R(0,1);return{q:`Số liền ${f?'sau':'trước'} của ${n} là số nào?`,ans:f?n+1:n-1,w:[n,f?n+2:n-2,f?n+10:n-10,f?n-1:n+1],s:[[`Số liền ${f?'sau':'trước'} ${f?'hơn':'kém'} số đã cho 1 đơn vị`,`${n}`],[`${n} ${f?'+':'−'} 1 = ${f?n+1:n-1}`,''],['Đó là đáp án','✅']]}}],
+qua10:[...ops(()=>{const a=R(6,9);return[a,R(11-a,9)]},'+'),...ops(()=>{const a=R(11,18);return[a,R(a-9,9)]},'−')],
+cn100:ops(()=>{const ua=R(5,9),ub=R(10-ua,9);return[R(1,4)*10+ua,R(1,4)*10+ub]},'+'),
+tru100:ops(()=>{const ua=R(0,8),ub=R(ua+1,9),ta=R(2,9);return[ta*10+ua,R(1,ta-1)*10+ub]},'−'),
+lit:[()=>{const L=R(0,1),u=L?'lít':'ki-lô-gam',X=L?'can':'bao',V=L?'đựng':'nặng',a=R(10,30),b=R(2,9),m=R(0,1),s=m?a+b:a-b;return{q:`${L?'Can':'Bao'} thứ nhất ${V} ${a} ${u}. ${L?'Can':'Bao'} thứ hai ${m?'nhiều':'ít'} hơn ${X} thứ nhất ${b} ${u}. Hỏi ${X} thứ hai ${V} bao nhiêu ${u}?`,ans:s,w:nd(s),s:[[m?'Nhiều hơn thì làm phép cộng':'Ít hơn thì làm phép trừ',L?'🥛':'🌾'],[`${a} ${m?'+':'−'} ${b} = ${s}`,`${a} ${m?'+':'−'} ${b}`],[`Đáp số: ${s} ${u}`,'✅']]}}],
+n25:mul(()=>[P([2,5]),R(2,9)]),
+so1000:[()=>{let n;do{n=R(101,998)}while(n%111===0);const h=Math.floor(n/100),t=Math.floor(n/10)%10,u=n%10;return{q:`Số ${n} gồm mấy trăm, mấy chục, mấy đơn vị?`,ans:`${h} trăm ${t} chục ${u} đơn vị`,w:[`${t} trăm ${h} chục ${u} đơn vị`,`${h} trăm ${u} chục ${t} đơn vị`,`${u} trăm ${t} chục ${h} đơn vị`,`${h+1} trăm ${t} chục ${u} đơn vị`],s:[[`Số ${n} có ba chữ số`,`${n}`],[`Hàng trăm ${h}, hàng chục ${t}, hàng đơn vị ${u}`,`${h} | ${t} | ${u}`],['Đọc theo thứ tự trăm, chục, đơn vị','✅']]}},()=>{const[a,b,c]=tri(100,999),k=R(0,1),r=k?Math.max(a,b,c):Math.min(a,b,c);return{q:`Số ${k?'lớn':'bé'} nhất trong các số ${a}, ${b}, ${c} là số nào?`,ans:r,w:[a,b,c,r+10],s:[['So sánh hàng trăm trước, rồi hàng chục, hàng đơn vị',`${a}   ${b}   ${c}`],[`Số ${k?'lớn':'bé'} nhất là ${r}`,'✅']]}}],
+gio:[()=>{const g=x=>((x-1)%12+12)%12+1,h=R(1,12),d=R(1,5),e=g(h+d);return{q:`Bây giờ là ${h} giờ. Sau ${d} giờ nữa là mấy giờ?`,ans:`${e} giờ`,w:[g(h+d+1),g(h+d-1),g(h-d)].map(x=>x+' giờ'),s:[[`Cộng thêm: ${h} + ${d} = ${h+d}`,'⏰'],[h+d>12?`Quá 12 giờ thì trừ đi 12: ${h+d} − 12 = ${h+d-12}`:`Đồng hồ chỉ ${e} giờ`,''],[`Sau ${d} giờ nữa là ${e} giờ`,'✅']]}}],
+so1000b:[()=>{const d=P([5,10,100]),n=R(500,950);return{q:`Đếm bớt ${d}: ${n}, ${n-d}, ${n-2*d}, …?`,ans:n-3*d,w:[n-4*d,n-3*d+(d===100?10:1),n-2*d,n-3*d-1],s:[[`Mỗi số kém số đứng trước ${d} đơn vị`,`${n} → ${n-d} → ${n-2*d}`],[`${n-2*d} − ${d} = ${n-3*d}`,''],['Đó là đáp án','✅']]}}],
+bn:mul(()=>[P([6,7,8,9]),R(2,9)]),
+chia:mul(()=>[R(2,9),R(2,9)]),
+nhan:mul(()=>[R(12,49),R(2,9)]).slice(0,2),
+chia100:mul(()=>{const b=R(2,9);return[b,R(Math.ceil(20/b),Math.floor(99/b))]}),
+cv:[()=>{const c=R(3,15);return{q:`Hình vuông có cạnh ${c} cm. Chu vi hình vuông là bao nhiêu cm?`,ans:4*c,w:[2*c,c*c,4*c+2,c+4],s:[['Chu vi hình vuông = cạnh × 4',''],[`${c} × 4 = ${4*c}`,`${c} × 4`],[`Chu vi là ${4*c} cm`,'✅']]}},()=>{const l=R(5,12),w=R(2,l-1),p=(l+w)*2;return{q:`Hình chữ nhật có chu vi ${p} cm, chiều dài ${l} cm. Chiều rộng là bao nhiêu cm?`,ans:w,w:[p/2,p-l,p/2+l,w+1],s:[['Nửa chu vi = dài + rộng',`${p} ÷ 2 = ${p/2}`],[`Chiều rộng = ${p/2} − ${l} = ${w}`,''],[`Chiều rộng là ${w} cm`,'✅']]}}],
+dt:[()=>{const l=R(4,12),w=R(2,l-1),s=l*w;return{q:`Hình chữ nhật có diện tích ${s} cm², chiều dài ${l} cm. Chiều rộng là bao nhiêu cm?`,ans:w,w:[w+1,w-1,s-l,l-w],s:[['Chiều rộng = diện tích ÷ chiều dài',`${s} ÷ ${l}`],[`${s} ÷ ${l} = ${w}`,''],[`Chiều rộng là ${w} cm`,'✅']]}}],
+lamtron:[()=>{const n=R(10000,99999),p=P([100,1000,10000]),nm={100:'trăm',1000:'nghìn',10000:'chục nghìn'}[p],fl=Math.floor(n/p)*p,a=Math.round(n/p)*p,nx=Math.floor(n/(p/10))%10;return{q:`Làm tròn số ${fx(n)} đến hàng ${nm}`,ans:fx(a),w:[fl===a?fl+p:fl,a+p,a-p,a+p/10].filter(x=>x>0).map(fx),s:[[`Tìm hàng ${nm}, rồi nhìn chữ số bên phải nó`,fx(n)],[`Chữ số bên phải là ${nx}: ${nx>=5?'từ 5 trở lên nên làm tròn lên':'dưới 5 nên giữ nguyên'}`,`${nx}`],[`Kết quả: ${fx(a)}`,'✅']]}}],
+bt:[()=>{const a=R(2,9),b=R(2,9),c=R(1,Math.min(a*b-1,20)),s=a*b-c;return{q:`${a} × ${b} − ${c} = ?`,ans:s,w:[a*b+c,s+1,s-1,a+b-c],s:[['Nhân trước, trừ sau',`${a} × ${b} − ${c}`],[`${a} × ${b} = ${a*b}`,`${a*b} − ${c}`],[`${a*b} − ${c} = ${s}`,'✅']]}},()=>{const b=R(2,9),d=R(2,9),c=R(2,9),s=d+c;return{q:`${b*d} ÷ ${b} + ${c} = ?`,ans:s,w:[s+1,s-1,d,b+c],s:[['Chia trước, cộng sau',`${b*d} ÷ ${b} + ${c}`],[`${b*d} ÷ ${b} = ${d}`,`${d} + ${c}`],[`${d} + ${c} = ${s}`,'✅']]}}],
+nhan2:mul(()=>[R(12,59),R(11,29)]).slice(0,1),
+goc:[()=>{const k=R(0,1),B=k?180:90,a=k?R(20,160):R(10,80);return{q:`Hai góc ghép lại thành một góc ${k?'bẹt (180°)':'vuông (90°)'}. Một góc là ${a}°. Góc còn lại là bao nhiêu độ?`,ans:B-a,w:[a,B+a,B-a+10,B-a+5],s:[[`Góc còn lại = ${B}° − ${a}°`,`${B}° − ${a}°`],[`${B} − ${a} = ${B-a}`,''],[`Góc còn lại là ${B-a}°`,'✅']]}}],
+dvd:[()=>{const u=P([['yến',10],['tạ',100],['tấn',1000]]),n=R(2,9);return{q:`${n*u[1]} kg = … ${u[0]}`,ans:n,w:[n+1,n-1,n*10,n+10],s:[[`1 ${u[0]} = ${u[1]} kg`,'⚖️'],[`${n*u[1]} ÷ ${u[1]} = ${n}`,`${n*u[1]} kg ÷ ${u[1]}`],[`${n*u[1]} kg = ${n} ${u[0]}`,'✅']]}}],
+ps:[()=>{const d=R(4,10),a=R(3,d-1),b=R(1,a-1),t=a-b;return{q:`${a}/${d} − ${b}/${d} = ?`,ans:`${t}/${d}`,w:[`${t}/${2*d}`,`${a+b}/${d}`,`${t+1}/${d}`,`${a*b}/${d}`],s:[['Mẫu số giống nhau thì giữ nguyên mẫu số','🟧'.repeat(t)+'⬜'.repeat(b)],[`Trừ hai tử số: ${a} − ${b} = ${t}`,`${a} − ${b} = ${t}`],[`Kết quả: ${t}/${d}`,'✅']]}},()=>{const d=R(4,10),a=R(1,d-3),b=R(1,d-a-1),t=a+b;return{q:`${a}/${d} + …/${d} = ${t}/${d}`,ans:b,w:nd(b),s:[['Tử số cần tìm = tử số của tổng − tử số đã biết','🔍'],[`${t} − ${a} = ${b}`,`${b}`],['Mẫu số giữ nguyên','✅']]}}],
+tp:[()=>{const a=R(31,99),b=R(11,a-10),s=a-b;return{q:`${fm(a/10)} − ${fm(b/10)} = ?`,ans:fm(s/10),w:[fm((s+1)/10),fm((s-1)/10),fm((s+10)/10),fm((s+2)/10)],s:[['Viết thẳng hàng dấu phẩy',`${fm(a/10)}\n− ${fm(b/10)}`],[`Trừ như số tự nhiên: ${a} − ${b} = ${s}`,`${a} − ${b} = ${s}`],[`Đặt lại dấu phẩy: ${fm(s/10)}`,'✅']]}},()=>{let x=R(11,99),y=R(11,99);if(x===y)y++;return{q:`So sánh: ${fm(x/10)} … ${fm(y/10)}`,ans:x>y?'>':'<',w:['>','<','='],s:[['So sánh phần nguyên trước, rồi đến phần thập phân',`${fm(x/10)}   ${fm(y/10)}`],[x>y?`${fm(x/10)} lớn hơn ${fm(y/10)}`:`${fm(x/10)} bé hơn ${fm(y/10)}`,'✅']]}}],
+nhantp:[()=>{const m=R(11,999)/10,k=P([10,100]),z=String(k).length-1;return{q:`${fd(m)} ÷ ${k} = ?`,ans:fd(m/k),w:[m*k,m/k*10,m/k/10,m*k/10].map(fd),s:[[`Chia cho ${k}: chuyển dấu phẩy sang trái ${z} chữ số`,`${fd(m)} → ?`],['Nếu thiếu chữ số thì thêm số 0 ở phần nguyên',''],[`Kết quả: ${fd(m/k)}`,'✅']]}}],
+dttg:[()=>{const a=R(3,12),h=2*R(2,6),s=a*h/2;return{q:`Tam giác có diện tích ${s} cm², đáy ${a} cm. Chiều cao là bao nhiêu cm?`,ans:h,w:[s/a,a,h+2,h-2],s:[['Chiều cao = diện tích × 2 ÷ đáy',`${s} × 2 ÷ ${a}`],[`${s} × 2 = ${2*s}, rồi ${2*s} ÷ ${a} = ${h}`,''],[`Chiều cao là ${h} cm`,'✅']]}}],
+pt:[()=>{const p=P([10,20,25,50]),n=P([40,80,120,200]),s=n*p/100;return{q:`Lớp 5${P(['A','B','C'])} có ${n} học sinh, ${p}% số học sinh là học sinh giỏi. Có bao nhiêu học sinh giỏi?`,ans:s,w:[n-s,s*2,s+p,s+10],s:[[`Tìm ${p}% của ${n}`,`${n} × ${p} ÷ 100`],[`${n} × ${p} = ${n*p}, rồi ${n*p} ÷ 100 = ${s}`,''],[`Có ${s} học sinh giỏi`,'✅']]}},()=>{const p=P([10,20,25,50]),n=P([40,80,120,200]),s=n*p/100;return{q:`${p}% của một số là ${s}. Số đó là bao nhiêu?`,ans:n,w:[n*2,n/2,s+p,s*p],s:[['Số đó = giá trị × 100 ÷ phần trăm',`${s} × 100 ÷ ${p}`],[`${s} × 100 = ${s*100}, rồi ${s*100} ÷ ${p} = ${n}`,''],[`Số đó là ${n}`,'✅']]}},()=>{const p=P([10,20,25,50]),n=P([20,40,200]),g=n*p/100;return{q:`Lớp có ${n} học sinh, trong đó ${g} học sinh giỏi. Học sinh giỏi chiếm bao nhiêu phần trăm?`,ans:`${p}%`,w:[`${100-p}%`,`${p*2}%`,`${p+5}%`,`${g}%`],s:[[`Tỉ số phần trăm = ${g} × 100 ÷ ${n}`,''],[`${g} × 100 = ${g*100}, rồi ${g*100} ÷ ${n} = ${p}`,''],[`Chiếm ${p}%`,'✅']]}}],
+vantoc:[()=>{const v=P([30,40,45,50,60]),t=R(2,6),s=v*t;return{q:`Một người đi xe máy được ${s} km trong ${t} giờ. Vận tốc của người đó là bao nhiêu km/giờ?`,ans:v,w:[s-t,s+t,t,v+10],s:[['Vận tốc = quãng đường ÷ thời gian',`${s} ÷ ${t}`],[`${s} ÷ ${t} = ${v}`,''],[`Vận tốc là ${v} km/giờ`,'✅']]}},()=>{const v=P([30,40,45,50,60]),t=R(2,6),s=v*t;return{q:`Một ô tô đi quãng đường ${s} km với vận tốc ${v} km/giờ. Thời gian đi là bao nhiêu giờ?`,ans:t,w:[t+1,t-1,t+2,v-t],s:[['Thời gian = quãng đường ÷ vận tốc',`${s} ÷ ${v}`],[`${s} ÷ ${v} = ${t}`,''],[`Thời gian đi là ${t} giờ`,'✅']]}}]
+};
+
+// Tiến trình lưu trong trình duyệt (nếu bị chặn thì vẫn chạy, chỉ không nhớ)
+let D={best:{},days:[],hist:[],name:'',theme:'auto',sound:true};
+try{Object.assign(D,JSON.parse(localStorage.getItem('toanvui')||'{}'))}catch(e){}
+const save=()=>{try{localStorage.setItem('toanvui',JSON.stringify(D))}catch(e){}};
+let S={v:'home',g:1,t:'c10',q:null,open:true,rs:false},timers=[],V=[];
+const $=s=>document.querySelector(s),tg=()=>T.filter(x=>x.g===S.g),cur=()=>T.find(x=>x.id===S.t),tn=id=>T.find(x=>x.id===id);
+const lvl=id=>{const b=D.best[id];return b===undefined?0:b<=2?1:b-1};
+const LV=['Chưa học','Cần cố gắng','Đã hiểu bài','Thành thạo','Tinh thông'],LC=['#b8bcc8','#f0a500','#f0a500','#2faa6b','#7fdca8'];
+const rec=()=>(tg().find(t=>lvl(t.id)<3)||tg()[0]).id;
+const dk=d=>{d=new Date(d);return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()};
+const dset=()=>new Set([...D.days,...D.hist.map(h=>dk(h.ts))]);
+function streak(){const s=dset();let n=0,d=new Date();if(!s.has(dk(d)))d.setDate(d.getDate()-1);while(s.has(dk(d))){n++;d.setDate(d.getDate()-1)}return n}
+function renderFire(){const n=streak(),f=$('#fire');f.className='fire'+(n?'':' off');f.textContent='🔥 '+n;f.title='Chuỗi ngày học liên tiếp'}
+function streakPanel(){const s=dset(),n=streak(),t=s.has(dk(Date.now()));
+ const w=[6,5,4,3,2,1,0].map(i=>{const d=new Date();d.setDate(d.getDate()-i);const ok=s.has(dk(d));return `<div>${['CN','T2','T3','T4','T5','T6','T7'][d.getDay()]}<i class="${ok?'ok':''}">${ok?'✓':''}</i></div>`}).join('');
+ return `<section class="pn"><div class="ph"><h3>Chuỗi<br>ngày học</h3><span>🔥</span></div><p class="sk"><b>${n}</b> ngày liên tiếp</p><div class="wk">${w}</div><div class="mut">${t?'Hôm nay bạn đã giữ chuỗi. Hẹn gặp lại ngày mai!':n?'Làm một lượt quiz hôm nay để giữ chuỗi nhé!':'Làm một lượt quiz hôm nay để bắt đầu chuỗi!'}</div></section>`}
+function renderWho(){const n=D.name.trim();$('#who').innerHTML=n?`<b>${esc([...n][0].toUpperCase())}</b><span>${esc(n)}</span>`:'<b>?</b><span>Đặt tên</span>'}
+function applyTheme(){const r=document.documentElement;D.theme==='auto'?r.removeAttribute('data-theme'):r.setAttribute('data-theme',D.theme)}
+function go(v){S.v=v;S.q=null;S.rs=false;draw();window.scrollTo(0,0)}
+function setGrade(g){S.g=g;S.t=tg()[0].id;S.q=null;if(S.v==='quiz')S.v='home';draw()}
+function start(id){S.t=id;S.v='quiz';S.q=null;draw();window.scrollTo(0,0)}
+function study(id){S.t=id;S.v='guide';draw();window.scrollTo(0,0)}
+function draw(){
+ timers.forEach(clearTimeout);timers=[];applyTheme();renderWho();renderFire();
+ $('#gsel').innerHTML=`<i></i><select aria-label="Chọn lớp" onchange="setGrade(+this.value)">${[1,2,3,4,5].map(g=>`<option value="${g}"${g===S.g?' selected':''}>Lớp ${g}</option>`).join('')}</select>`;
+ const a=S.v==='quiz'?'home':S.v,it=[['home','🏫','Các lớp'],['guide','🧭','Hướng dẫn tôi'],['hist','🕘','Lịch sử'],['set','⚙️','Cài đặt'],['help','❓','Trợ giúp']];
+ $('#nav').innerHTML=it.map((x,i)=>`${i===3?'<div class="sp"></div>':''}<button class="nv${x[0]===a?' on':''}" onclick="go('${x[0]}')"><span>${x[1]}</span>${x[2]}</button>`).join('');
+ $('#aside').innerHTML='';
+ ({home,guide,quiz,hist,set:setv,help})[S.v]();
+}
+function topicCard(t){const l=lvl(t.id),b=D.best[t.id];
+ return `<div class="tc"><div class="ti">${t.i}</div><div class="tx"><b>${t.n}</b><small><span class="bd" style="background:${LC[l]}"></span>${LV[l]}${b!==undefined?` · cao nhất ${b}/5`:''}</small></div><div class="ta"><button class="btn alt sm" onclick="study('${t.id}')">Học bài</button><button class="btn sm" onclick="start('${t.id}')">Làm quiz</button></div></div>`}
+function home(){
+ const nm=D.name?esc(D.name):'Bạn';
+ 
+ $('#app').innerHTML=`<section class="hero"><h1>${nm} ơi, hôm nay mình cùng học toán nhé!</h1><p>Bạn chắc chắn sẽ làm được! Mỗi bước tiến đều sẽ giúp bạn trưởng thành hơn.</p><div class="btns"><button class="btn" onclick="start(rec())">Bắt đầu</button><button class="btn alt" onclick="S.open=true;draw();$('#list').scrollIntoView({behavior:'smooth'})">Xem tất cả bài tập</button></div></section><div class="sh"><h2>Các bài học</h2><button class="lk" onclick="S.open=!S.open;draw()">${S.open?'Đóng tất cả':'Mở tất cả'}</button></div><div id="list">${S.open?tg().map(topicCard).join(''):''}</div>`;
+ const c=[0,0,0,0,0];T.forEach(t=>{if(D.best[t.id]!==undefined)c[lvl(t.id)]++});
+ $('#aside').innerHTML=`${streakPanel()}<section class="pn"><div class="ph"><h3>Học tập<br>tinh thông</h3><span>👑</span></div>${[1,2,3,4].map(i=>`<div class="pr"><span class="bd" style="background:${LC[i]}"></span>${LV[i]}<b>${c[i]}</b></div>`).join('')}</section>`;
+}
+const yt=u=>{const m=/(?:youtu\.be\/|[?&]v=|embed\/)([\w-]{11})/.exec(u||'');return m?m[1]:null};
+const canEmbed=()=>/^https?:$/.test(location.protocol)&&!/claude/i.test(location.hostname);
+const ytBox=u=>canEmbed()?`<div class="yt"><iframe src="https://www.youtube.com/embed/${yt(u)}?rel=0" title="Video hướng dẫn" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div><a class="lnk" href="${u}" target="_blank" rel="noopener">▶ Không xem được ở đây? Mở video trên YouTube</a>`:`<a class="ytc" href="${u}" target="_blank" rel="noopener"><span>▶</span><b>Xem video hướng dẫn</b><small>Bấm để mở video trên YouTube</small></a>`;
+function vid(s){V=s;return `<div class="video"><div class="vb"><b>🎬 Video hướng dẫn</b><button onclick="play(V)">↻ Xem lại</button></div><div class="scr" id="scr"></div><div class="pg"><i id="pg"></i></div></div><video class="mine" controls playsinline preload="metadata" src="videos/${S.t}.mp4" onerror="this.remove()"></video>`}
+function play(s){
+ if(!$('#scr'))return;timers.forEach(clearTimeout);timers=[];const n=s.length;$('#pg').style.width='0';
+ s.forEach((st,i)=>timers.push(setTimeout(()=>{$('#scr').innerHTML=`<div class="st"><small>Bước ${i+1}/${n}</small><div class="vis">${st[1]||''}</div><p>${st[0]}</p></div>`;$('#pg').style.width=((i+1)/n*100)+'%'},i*3000)))}
+function dragScroll(el){let d=0,x=0,l=0,m=0;el.addEventListener('pointerdown',e=>{if(e.pointerType==='touch')return;d=1;m=0;x=e.clientX;l=el.scrollLeft});el.addEventListener('pointermove',e=>{if(!d)return;const dx=e.clientX-x;if(Math.abs(dx)>4)m=1;el.scrollLeft=l-dx});['pointerup','pointerleave'].forEach(k=>el.addEventListener(k,()=>{d=0}));el.addEventListener('click',e=>{if(m){e.stopPropagation();e.preventDefault();m=0}},true)}
+function guide(){
+ const t=cur(),ex=t.gen();
+ $('#app').innerHTML=`<div class="chips">${tg().map(x=>`<button class="chip${x.id===S.t?' on':''}" onclick="study('${x.id}')">${x.i} ${x.n}</button>`).join('')}</div>${yt(VL[t.id])?`<section class="card"><h2>${t.i} ${t.n}</h2>${ytBox(VL[t.id])}</section>`:`<section class="card"><h2>${t.i} ${t.n}</h2>${t.learn.map(x=>`<p class="ls">${x}</p>`).join('')}</section><section class="card"><h3>Xem ví dụ: ${ex.q}</h3>${vid(ex.s)}</section>`}<button class="btn wide" onclick="start('${t.id}')">Làm quiz bài này</button>`;
+ play(ex.s);const cs=document.querySelector('.chips'),ac=document.querySelector('.chip.on');dragScroll(cs);if(ac)cs.scrollLeft=Math.max(0,ac.offsetLeft-cs.offsetLeft-12);
+}
+function mk(t){const q=P([t.gen,...(EX[t.id]||[])])(),a=String(q.ans),o=[a];q.w.forEach(x=>{x=String(x);if(!o.includes(x)&&o.length<4)o.push(x)});return{...q,ans:a,o:o.sort(()=>Math.random()-.5)}}
+function quiz(){
+ const t=cur();
+ if(!S.q){const L=[],seen=new Set();let n=0;while(L.length<5&&n++<80){const c=mk(t);if(!seen.has(c.q)){seen.add(c.q);L.push(c)}}while(L.length<5)L.push(mk(t));S.q={l:L,i:0,sc:0}}
+ const q=S.q;if(q.i>=5)return done();const c=q.l[q.i];
+ $('#app').innerHTML=`<div class="qh"><button class="lk" onclick="go('home')">← Thoát</button><b>${t.i} ${t.n}</b></div><section class="card"><div class="meta">Câu ${q.i+1}/5 · ⭐ ${q.sc}</div><h2 class="qq">${c.q}</h2><div class="opts">${c.o.map(o=>`<button class="opt" onclick="ans(this,'${o}')">${esc(o)}</button>`).join('')}</div><div id="fb"></div></section>`;
+}
+function ans(b,v){
+ const q=S.q,c=q.l[q.i],right=v===c.ans;
+ document.querySelectorAll('.opt').forEach(x=>{x.disabled=true;if(x.textContent===c.ans)x.classList.add('ok')});
+ let h;
+ if(right){q.sc++;sfx('ok');h='<div class="msg good">🎉 Giỏi lắm! Đúng rồi.</div>'}
+ else{sfx('bad');b.classList.add('bad');h=`<div class="msg oops">Chưa đúng, không sao đâu! Đáp án đúng là <b>${c.ans}</b>. Xem video để biết cách sửa nhé:</div>${vid(c.s)}`}
+ h+=`<button class="btn wide" onclick="nx()">${q.i<4?'Câu tiếp theo':'Xem kết quả 🏆'}</button>`;
+ $('#fb').innerHTML=h;if(!right)play(c.s);
+ $('#fb').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function nx(){S.q.i++;draw()}
+function done(){
+ const q=S.q,s=q.sc,t=cur(),st=s>=5?3:s>=3?2:s>=1?1:0;
+ if(!q.rec){q.rec=1;sfx('done');D.hist.unshift({t:t.id,s,ts:Date.now()});D.hist=D.hist.slice(0,100);D.best[t.id]=Math.max(D.best[t.id]||0,s);const k=dk(Date.now());if(!D.days.includes(k))D.days.push(k);D.days=D.days.slice(-400);save();renderFire()}
+ $('#app').innerHTML=`<section class="card ctr"><h2>Kết quả: ${s}/5</h2><div class="stars">${'⭐'.repeat(st)||'💪'}</div><p>${s>=4?'Xuất sắc! Bạn làm rất tốt.':'Cố gắng thêm chút nữa nhé, bạn làm được mà!'}</p><button class="btn wide" onclick="S.q=null;draw()">Làm lại</button><button class="btn alt wide" onclick="study('${t.id}')">Ôn lại bài</button><button class="btn alt wide" onclick="go('home')">Về trang chủ</button></section>`;
+}
+function hist(){
+ const r=D.hist.slice(0,30).filter(h=>tn(h.t));
+ $('#app').innerHTML=`<section class="card"><h2>Lịch sử làm bài</h2>${r.length?r.map(h=>`<div class="hr"><span>${tn(h.t).i} ${tn(h.t).n}</span><b>${h.s}/5</b><small>${new Date(h.ts).toLocaleString('vi-VN',{dateStyle:'short',timeStyle:'short'})}</small></div>`).join(''):'<p>Bạn chưa làm bài nào. Hãy bấm Bắt đầu ở trang Các lớp nhé!</p>'}</section>`;
+}
+function setv(){
+ $('#app').innerHTML=`<section class="card"><h2>Cài đặt</h2><label for="nm">Tên của bạn</label><input class="fld" id="nm" maxlength="20" value="${esc(D.name)}" oninput="D.name=this.value;save();renderWho()"><label for="th">Giao diện</label><select class="fld" id="th" onchange="D.theme=this.value;save();applyTheme()">${[['auto','Tự động theo thiết bị'],['light','Sáng'],['dark','Tối']].map(x=>`<option value="${x[0]}"${D.theme===x[0]?' selected':''}>${x[1]}</option>`).join('')}</select><label for="sd">Âm thanh</label><select class="fld" id="sd" onchange="D.sound=this.value==='1';save();sfx('ok')"><option value="1"${D.sound?' selected':''}>Bật</option><option value="0"${D.sound?'':' selected'}>Tắt</option></select><label>Tiến trình</label><button class="btn alt sm" onclick="reset(this)">Xóa tiến trình</button></section>`;
+}
+function reset(b){if(!S.rs){S.rs=true;b.textContent='Bấm lần nữa để xóa hết';return}D.best={};D.hist=[];D.days=[];save();S.rs=false;draw()}
+function help(){
+ $('#app').innerHTML=`<section class="card"><h2>Trợ giúp</h2><p class="ls"><b>1. Chọn lớp</b> ở góc trên bên trái.</p><p class="ls"><b>2. Hướng dẫn tôi</b>: đọc bài và xem video ví dụ của từng chủ đề.</p><p class="ls"><b>3. Làm quiz</b>: mỗi lượt có 5 câu. Làm sai sẽ có video chỉ cách sửa.</p><p class="ls"><b>4. Mức thành thạo</b>: điểm cao nhất của mỗi bài quyết định mức: Cần cố gắng, Đã hiểu bài, Thành thạo, Tinh thông.</p><p class="ls"><b>5. Chuỗi ngày học 🔥</b>: mỗi ngày hoàn thành ít nhất 1 lượt quiz thì chuỗi tăng thêm 1. Bỏ lỡ một ngày thì chuỗi quay về 0.</p><p class="ls"><b>6. Âm thanh 🔊</b>: bật hoặc tắt trong mục Cài đặt.</p><p class="ls">Nội dung bám theo mạch kiến thức của SGK Toán bộ Kết nối tri thức với cuộc sống (lớp 1 đến lớp 5).</p><p class="ls">Tiến trình được lưu trong trình duyệt của thiết bị này.</p></section>`;
+}
+draw();
+</script>
+</body>
+</html>
