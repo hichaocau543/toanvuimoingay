@@ -128,6 +128,16 @@ label{display:block;margin:14px 0 4px;font-weight:600}
 button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--pri);outline-offset:2px}
 @media (max-width:1080px){.cols{grid-template-columns:minmax(0,1fr)}#aside{width:100%}}
 @media (max-width:820px){.shell{grid-template-columns:minmax(0,1fr)}.side{height:auto;flex-direction:row;padding:8px 10px;overflow-x:auto;border-right:0;border-bottom:1px solid var(--line)}.logo{display:none}#nav{flex-direction:row;gap:4px;flex:none}.sp{display:none}.nv{padding:8px 12px;white-space:nowrap;font-size:14px}.top,.cols{padding-left:14px;padding-right:14px}.hero{padding:20px}h1{font-size:24px}}
+.vis .vc{white-space:normal;letter-spacing:0}
+.vc{border-collapse:collapse;margin:0 auto;font-size:36px;line-height:1.1;font-variant-numeric:tabular-nums}
+.vc td{min-width:.8em;padding:0 .12em;text-align:center;height:1.2em}
+.vc .cy{font-size:.5em;height:1.7em;color:var(--sun);font-weight:700;vertical-align:bottom}
+.vc .op{text-align:left;opacity:.8}
+.vc .ln td{border-top:3px solid currentColor;height:0;padding:0}
+.vc .h{color:var(--sun);font-weight:700}
+.vc .rs{font-weight:700}
+.vc s{opacity:.55;text-decoration-thickness:3px}
+.vc .bi{font-size:.5em;color:var(--sun);font-weight:700;font-style:normal;vertical-align:top;margin-right:2px}
 </style>
 </head>
 <body>
@@ -167,6 +177,27 @@ const R=(a,b)=>Math.floor(Math.random()*(b-a+1))+a,P=a=>a[R(0,a.length-1)];
 const nd=n=>[n+1,n-1,n+2,n-2,n+10].filter(x=>x>=0&&x!==n);
 const fm=x=>x.toFixed(1).replace('.',',');
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+// Vẽ phép cộng/trừ theo cột dọc.
+// o.a, o.b: hai số (số hoặc chuỗi, ví dụ '12,5'); o.op: '+' hoặc '−'
+// o.r: kết quả (không ghi thì tự tính); o.sh: số chữ số kết quả đã hiện (tính từ bên phải)
+// o.hl: cột đang tô vàng (0 = hàng đơn vị, 1 = hàng chục...)
+// o.cy: dấu nhớ khi cộng, ví dụ {1:1} = ghi nhỏ số 1 phía trên cột hàng chục
+// o.bw: khi trừ có lấy 1 chục, ví dụ {lend:[1],recv:[0]} = cột chục cho lấy (gạch bỏ, ghi số mới), cột đơn vị nhận 1 chục
+function vc(o){
+ const A=String(o.a),B=String(o.b),Rr=String(o.r!=null?o.r:(o.op==='+'?o.a+o.b:o.a-o.b)),
+ n=Math.max(A.length,B.length,Rr.length),sh=o.sh||0,cy=o.cy||{},bw=o.bw||{lend:[],recv:[]},
+ d=(s,i)=>i<s.length?s[s.length-1-i]:'',
+ H=i=>i===o.hl?' class="h"':'',
+ cols=[...Array(n).keys()].reverse();
+ const c1=cols.map(i=>{let v=cy[i];if(bw.lend.includes(i))v=d(A,i)-1;return`<td class="cy">${v==null?'':v}</td>`}).join(''),
+ c2=cols.map(i=>{const c=d(A,i);let h=bw.lend.includes(i)?`<s>${c}</s>`:c;if(bw.recv.includes(i))h=`<i class="bi">1</i>`+h;return`<td${H(i)}>${h}</td>`}).join(''),
+ c3=cols.map(i=>`<td${H(i)}>${d(B,i)}</td>`).join(''),
+ c4=cols.map(()=>'<td></td>').join(''),
+ c5=cols.map(i=>`<td class="rs${i===o.hl?' h':''}">${i<sh?d(Rr,i):''}</td>`).join('');
+ return`<table class="vc"><tr><td></td>${c1}</tr><tr><td></td>${c2}</tr><tr><td class="op">${o.op}</td>${c3}</tr><tr class="ln"><td></td>${c4}</tr><tr><td></td>${c5}</tr></table>`
+}
+
+
 const T=[
 {g:1,id:'c10',i:'➕',n:'Cộng trong phạm vi 10',learn:['Cộng là gộp hai nhóm lại thành một nhóm.','Ví dụ: 3 + 2. Có 3 quả táo, thêm 2 quả nữa, đếm lại được 5 quả.','Mẹo: giữ số lớn trong đầu rồi đếm tiếp số nhỏ.'],
  gen(){const a=R(1,9),b=R(1,10-a),s=a+b;return{q:`${a} + ${b} = ?`,ans:s,w:nd(s),s:[[`Có ${a} quả táo`,'🍎'.repeat(a)],[`Thêm ${b} quả nữa`,'🍎'.repeat(a)+' ➕ '+'🍏'.repeat(b)],[`Đếm tất cả: ${a} + ${b} = ${s}`,'🍎'.repeat(a)+'🍏'.repeat(b)]]}}},
@@ -175,7 +206,7 @@ const T=[
 {g:2,id:'n25',i:'✖️',n:'Bảng nhân 2 và 5',learn:['Nhân là cộng nhiều lần cùng một số.','Ví dụ: 5 × 3 = 5 + 5 + 5 = 15.','Mẹo: bảng nhân 5 luôn có tận cùng là 0 hoặc 5.'],
  gen(){const n=P([2,5]),k=R(2,9),s=n*k;return{q:`${n} × ${k} = ?`,ans:s,w:[s+n,s-n,s+1,s-1],s:[[`${n} × ${k} nghĩa là cộng ${k} lần số ${n}`,'🟦'.repeat(k)],[`Cộng dần: ${n} + ${n} … (${k} lần)`,Array.from({length:k},(_,i)=>n*(i+1)).join(' → ')],[`Vậy ${n} × ${k} = ${s}`,'✅']]}}},
 {g:2,id:'cn100',i:'💯',n:'Cộng có nhớ trong 100',learn:['Cộng từ hàng đơn vị trước, rồi đến hàng chục.','Nếu hàng đơn vị cộng được 10 trở lên thì viết số lẻ và nhớ 1 sang hàng chục.','Ví dụ: 28 + 35. Đơn vị: 8 + 5 = 13, viết 3 nhớ 1. Chục: 2 + 3 + 1 = 6. Kết quả 63.'],
- gen(){const ua=R(5,9),ub=R(10-ua,9),ta=R(1,4),tb=R(1,4),a=ta*10+ua,b=tb*10+ub,s=a+b,u=ua+ub;return{q:`${a} + ${b} = ?`,ans:s,w:[s-10,s+10,s+1,s-1],s:[['Cộng hàng đơn vị trước',`${ua} + ${ub} = ${u}`],[`Viết ${u-10}, nhớ 1 sang hàng chục`,`${u} → viết ${u-10}, nhớ 1`],[`Cộng hàng chục: ${ta} + ${tb} + 1 = ${ta+tb+1}`,`${a} + ${b} = ${s}`]]}}},
+ gen(){const ua=R(5,9),ub=R(10-ua,9),ta=R(1,4),tb=R(1,4),a=ta*10+ua,b=tb*10+ub,s=a+b,u=ua+ub;return{q:`${a} + ${b} = ?`,ans:s,w:[s-10,s+10,s+1,s-1],s:[[`Cộng hàng đơn vị trước: ${ua} + ${ub} = ${u}`,vc({a,b,op:'+',hl:0})],[`Viết ${u-10}, nhớ 1 sang hàng chục`,vc({a,b,op:'+',hl:0,sh:1,cy:{1:1}})],[`Cộng hàng chục: ${ta} + ${tb} + 1 = ${ta+tb+1}. Vậy ${a} + ${b} = ${s}`,vc({a,b,op:'+',hl:1,sh:9,cy:{1:1}})]]}}},
 {g:3,id:'chia',i:'➗',n:'Phép chia trong bảng',learn:['Chia là tìm xem một số gồm bao nhiêu nhóm bằng nhau.','Ví dụ: 24 ÷ 4 = ? Nhớ bảng nhân: 4 × 6 = 24, nên 24 ÷ 4 = 6.','Mẹo: phép chia là phép nhân đi ngược lại.'],
  gen(){const b=R(2,9),c=R(2,9),p=b*c;return{q:`${p} ÷ ${b} = ?`,ans:c,w:nd(c),s:[[`Tìm số nhân với ${b} để được ${p}`,`${b} × ? = ${p}`],[`Nhớ bảng nhân: ${b} × ${c} = ${p}`,'🧠'],[`Vậy ${p} ÷ ${b} = ${c}`,'✅']]}}},
 {g:3,id:'cv',i:'▭',n:'Chu vi hình chữ nhật',learn:['Chu vi là độ dài đường bao quanh hình.','Công thức: chu vi = (chiều dài + chiều rộng) × 2.','Ví dụ: dài 8 cm, rộng 5 cm thì chu vi = (8 + 5) × 2 = 26 cm.'],
@@ -185,7 +216,7 @@ const T=[
 {g:3,id:'nhan',i:'🔢',n:'Nhân số có hai chữ số với số có một chữ số',learn:['Tách số có hai chữ số thành chục và đơn vị.','Ví dụ: 23 × 4 = 20 × 4 + 3 × 4 = 80 + 12 = 92.','Mẹo: nhân từng phần rồi cộng lại, sẽ ít nhầm hơn.'],
  gen(){const a=R(12,49),b=R(2,9),t=a-a%10,u=a%10,s=a*b;return{q:`${a} × ${b} = ?`,ans:s,w:[t*b+u,s+10,s-10,t+u*b],s:[[`Tách ${a} = ${t} + ${u}`,`${a} = ${t} + ${u}`],[`Nhân từng phần: ${t} × ${b} = ${t*b} và ${u} × ${b} = ${u*b}`,`${t*b}  |  ${u*b}`],[`Cộng lại: ${t*b} + ${u*b} = ${s}`,'✅']]}}},
 {g:5,id:'tp',i:'🔟',n:'Cộng số thập phân',learn:['Số thập phân có dấu phẩy ngăn phần nguyên và phần thập phân.','Khi cộng, viết các số thẳng hàng dấu phẩy, rồi cộng như số tự nhiên.','Ví dụ: 2,4 + 1,7 = 4,1.'],
- gen(){const a=R(11,89),b=R(11,89),s=a+b;return{q:`${fm(a/10)} + ${fm(b/10)} = ?`,ans:fm(s/10),w:[fm((s+1)/10),fm((s-1)/10),fm((s+10)/10),fm((s-10)/10)],s:[['Viết thẳng hàng dấu phẩy',`${fm(a/10)}\n+ ${fm(b/10)}`],[`Cộng như số tự nhiên: ${a} + ${b} = ${s}`,`${a} + ${b} = ${s}`],[`Đặt lại dấu phẩy: ${fm(s/10)}`,'✅']]}}},
+ gen(){const a=R(11,89),b=R(11,89),s=a+b;return{q:`${fm(a/10)} + ${fm(b/10)} = ?`,ans:fm(s/10),w:[fm((s+1)/10),fm((s-1)/10),fm((s+10)/10),fm((s-10)/10)],s:[['Viết thẳng hàng dấu phẩy',vc({a:fm(a/10),b:fm(b/10),op:'+',r:fm(s/10)})],[`Cộng như số tự nhiên: ${a} + ${b} = ${s}`,`${a} + ${b} = ${s}`],[`Đặt lại dấu phẩy: ${fm(s/10)}`,vc({a:fm(a/10),b:fm(b/10),op:'+',r:fm(s/10),sh:9})]]}}},
 {g:5,id:'pt',i:'％',n:'Tìm phần trăm của một số',learn:['Phần trăm là số phần trong 100 phần bằng nhau.','Muốn tìm p% của n: lấy n × p rồi chia cho 100.','Ví dụ: 25% của 80 = 80 × 25 ÷ 100 = 20.'],
  gen(){const p=P([10,20,25,50]),n=P([40,80,120,200]),s=n*p/100;return{q:`${p}% của ${n} là bao nhiêu?`,ans:s,w:[n/p,n-s,s*2,s+p],s:[[`${p}% nghĩa là ${p} phần trong 100 phần`,`${p}% = ${p}/100`],[`Tính: ${n} × ${p} = ${n*p}`,`${n} × ${p}`],[`Chia cho 100: ${n*p} ÷ 100 = ${s}`,'✅']]}}}
 ];
@@ -198,8 +229,8 @@ T.push(
  gen(){const n=R(11,99),t=Math.floor(n/10),u=n%10;return{q:`Số ${n} gồm mấy chục và mấy đơn vị?`,ans:`${t} chục ${u} đơn vị`,w:[`${u} chục ${t} đơn vị`,`${t+1} chục ${u} đơn vị`,`${t} chục ${(u+1)%10} đơn vị`],s:[[`Số ${n} có hai chữ số`,`${n}`],[`Chữ số hàng chục là ${t}, hàng đơn vị là ${u}`,`${t} chục  |  ${u} đơn vị`],[`Vậy ${n} gồm ${t} chục ${u} đơn vị`,'✅']]}}},
 {g:2,id:'qua10',i:'🔟',n:'Cộng, trừ qua 10 trong phạm vi 20',learn:['Cộng qua 10: tách số để đủ 10 trước, rồi cộng phần còn lại.','Ví dụ: 8 + 5 = 8 + 2 + 3 = 10 + 3 = 13.','Trừ qua 10: trừ để về 10 trước, rồi trừ tiếp. Ví dụ: 13 − 5 = 13 − 3 − 2 = 10 − 2 = 8.'],
  gen(){if(R(0,1)){const a=R(6,9),b=R(11-a,9),s=a+b,k=10-a;return{q:`${a} + ${b} = ?`,ans:s,w:nd(s),s:[[`Tách ${b} = ${k} + ${b-k} để ${a} + ${k} đủ 10`,`${a} + ${k} = 10`],[`Còn lại ${b-k}: 10 + ${b-k} = ${s}`,`10 + ${b-k}`],[`Vậy ${a} + ${b} = ${s}`,'✅']]}}const a=R(11,18),b=R(a-9,9),s=a-b,k=a-10;return{q:`${a} − ${b} = ?`,ans:s,w:nd(s),s:[[`Trừ ${k} trước để về 10`,`${a} − ${k} = 10`],[`Còn phải trừ ${b-k}: 10 − ${b-k} = ${s}`,`10 − ${b-k}`],[`Vậy ${a} − ${b} = ${s}`,'✅']]}}},
-{g:2,id:'tru100',i:'➖',n:'Trừ có nhớ trong phạm vi 100',learn:['Nếu chữ số hàng đơn vị của số bị trừ bé hơn số trừ thì mượn 1 chục (bằng 10 đơn vị).','Ví dụ: 52 − 17. Đơn vị: 12 − 7 = 5. Chục: 5 − 1 − 1 = 3. Kết quả 35.'],
- gen(){const ua=R(0,8),ub=R(ua+1,9),ta=R(2,9),tb=R(1,ta-1),a=ta*10+ua,b=tb*10+ub,s=a-b;return{q:`${a} − ${b} = ?`,ans:s,w:nd(s),s:[['Hàng đơn vị không trừ được, mượn 1 chục',`${ua+10} − ${ub} = ${ua+10-ub}`],[`Hàng chục: ${ta} − 1 (đã mượn) − ${tb} = ${ta-1-tb}`,`${ta-1-tb} chục`],[`Vậy ${a} − ${b} = ${s}`,'✅']]}}},
+{g:2,id:'tru100',i:'➖',n:'Trừ có nhớ trong phạm vi 100',learn:['Nếu chữ số hàng đơn vị của số bị trừ bé hơn số trừ thì lấy 1 chục (bằng 10 đơn vị).','Ví dụ: 52 − 17. Đơn vị: 12 − 7 = 5. Chục: 5 − 1 − 1 = 3. Kết quả 35.'],
+ gen(){const ua=R(0,8),ub=R(ua+1,9),ta=R(2,9),tb=R(1,ta-1),a=ta*10+ua,b=tb*10+ub,s=a-b,bw={lend:[1],recv:[0]};return{q:`${a} − ${b} = ?`,ans:s,w:nd(s),s:[[`Hàng đơn vị không trừ được, lấy 1 chục: ${ua+10} − ${ub} = ${ua+10-ub}`,vc({a,b,op:'−',hl:0,sh:1,bw})],[`Hàng chục: ${ta} − 1 (đã lấy) − ${tb} = ${ta-1-tb}`,vc({a,b,op:'−',hl:1,sh:9,bw})],[`Vậy ${a} − ${b} = ${s}`,vc({a,b,op:'−',sh:9})]]}}},
 {g:2,id:'so1000',i:'🧱',n:'Các số trong phạm vi 1000',learn:['Số có ba chữ số gồm trăm, chục và đơn vị.','Ví dụ: 352 gồm 3 trăm, 5 chục và 2 đơn vị, và 352 = 300 + 50 + 2.','So sánh: số nào có nhiều chữ số hơn thì lớn hơn; cùng số chữ số thì so từng hàng từ trái sang phải.'],
  gen(){const h=R(1,9),t=R(0,9),u=R(0,9),n=h*100+t*10+u;return{q:`${h} trăm ${t} chục ${u} đơn vị là số nào?`,ans:n,w:[h*100+u*10+t,t*100+h*10+u,n+10,n+100],s:[[`${h} trăm = ${h*100}`,`${h*100}`],[`${t} chục = ${t*10} và ${u} đơn vị = ${u}`,`${t*10} + ${u}`],[`${h*100} + ${t*10} + ${u} = ${n}`,'✅']]}}},
 {g:3,id:'bn',i:'✖️',n:'Bảng nhân 6, 7, 8, 9',learn:['Bảng nhân 6, 7, 8, 9 giúp tính nhanh nhiều lần cộng.','Ví dụ: 7 × 8 = 56; 9 × 6 = 54.','Mẹo: đổi chỗ hai thừa số thì tích không đổi, ví dụ 6 × 9 = 9 × 6.'],
@@ -281,7 +312,8 @@ dttg:[()=>{const a=R(3,12),h=2*R(2,6),s=a*h/2;return{q:`Tam giác có diện tí
 pt:[()=>{const p=P([10,20,25,50]),n=P([40,80,120,200]),s=n*p/100;return{q:`Lớp 5${P(['A','B','C'])} có ${n} học sinh, ${p}% số học sinh là học sinh giỏi. Có bao nhiêu học sinh giỏi?`,ans:s,w:[n-s,s*2,s+p,s+10],s:[[`Tìm ${p}% của ${n}`,`${n} × ${p} ÷ 100`],[`${n} × ${p} = ${n*p}, rồi ${n*p} ÷ 100 = ${s}`,''],[`Có ${s} học sinh giỏi`,'✅']]}},()=>{const p=P([10,20,25,50]),n=P([40,80,120,200]),s=n*p/100;return{q:`${p}% của một số là ${s}. Số đó là bao nhiêu?`,ans:n,w:[n*2,n/2,s+p,s*p],s:[['Số đó = giá trị × 100 ÷ phần trăm',`${s} × 100 ÷ ${p}`],[`${s} × 100 = ${s*100}, rồi ${s*100} ÷ ${p} = ${n}`,''],[`Số đó là ${n}`,'✅']]}},()=>{const p=P([10,20,25,50]),n=P([20,40,200]),g=n*p/100;return{q:`Lớp có ${n} học sinh, trong đó ${g} học sinh giỏi. Học sinh giỏi chiếm bao nhiêu phần trăm?`,ans:`${p}%`,w:[`${100-p}%`,`${p*2}%`,`${p+5}%`,`${g}%`],s:[[`Tỉ số phần trăm = ${g} × 100 ÷ ${n}`,''],[`${g} × 100 = ${g*100}, rồi ${g*100} ÷ ${n} = ${p}`,''],[`Chiếm ${p}%`,'✅']]}}],
 vantoc:[()=>{const v=P([30,40,45,50,60]),t=R(2,6),s=v*t;return{q:`Một người đi xe máy được ${s} km trong ${t} giờ. Vận tốc của người đó là bao nhiêu km/giờ?`,ans:v,w:[s-t,s+t,t,v+10],s:[['Vận tốc = quãng đường ÷ thời gian',`${s} ÷ ${t}`],[`${s} ÷ ${t} = ${v}`,''],[`Vận tốc là ${v} km/giờ`,'✅']]}},()=>{const v=P([30,40,45,50,60]),t=R(2,6),s=v*t;return{q:`Một ô tô đi quãng đường ${s} km với vận tốc ${v} km/giờ. Thời gian đi là bao nhiêu giờ?`,ans:t,w:[t+1,t-1,t+2,v-t],s:[['Thời gian = quãng đường ÷ vận tốc',`${s} ÷ ${v}`],[`${s} ÷ ${v} = ${t}`,''],[`Thời gian đi là ${t} giờ`,'✅']]}}]
 };
- // ===== BỔ SUNG: BÀI TOÁN CÓ LỜI VĂN NÂNG CAO (lớp 3–5) =====
+
+// ===== BỔ SUNG: BÀI TOÁN CÓ LỜI VĂN NÂNG CAO (lớp 3–5) =====
 // DÁN ĐOẠN NÀY NGAY SAU dòng "};" kết thúc của const EX={...}; và TRƯỚC dòng "// Tiến trình lưu trong trình duyệt"
 
 // ---------- LỚP 3 ----------
